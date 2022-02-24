@@ -2,7 +2,8 @@
 locals {
   activate_apis = [
     "cloudresourcemanager.googleapis.com",
-    "billingbudgets.googleapis.com"
+    "billingbudgets.googleapis.com",
+    "cloudbilling.googleapis.com"
   ]
 }
 
