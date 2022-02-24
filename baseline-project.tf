@@ -1,8 +1,9 @@
 
 locals {
-    activate_apis = [
-        "cloudresourcemanager.googleapis.com"
-    ]
+  activate_apis = [
+    "cloudresourcemanager.googleapis.com",
+    "billingbudgets.googleapis.com"
+  ]
 }
 
 resource "google_project_service" "baseline_project_services" {

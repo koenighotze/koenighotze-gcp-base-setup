@@ -1,11 +1,11 @@
 resource "google_billing_budget" "overall_budget" {
   billing_account = data.google_billing_account.billing_account.id
-  display_name = "Overall budget"
+  display_name    = "Overall budget"
 
   amount {
     specified_amount {
       currency_code = "EUR"
-      units = "20"
+      units         = "20"
     }
   }
 
