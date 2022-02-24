@@ -7,7 +7,10 @@ BILLING_ACCOUNT=${1?Billing account missing}
 # we use gcloud cli for the time being
 gcloud projects create koenighotze-baseline --name="Baseline" --labels=purpose=baseline
 gcloud beta billing projects link koenighotze-baseline --billing-account "${BILLING_ACCOUNT}"
+gcloud services enable cloudresourcemanager.googleapis.com  --project koenighotze-baseline
+
 gsutil mb -l europe-west3 -p koenighotze-baseline gs://koenighotze-baseline
 
 gcloud projects create koenighotze-bodleian --name="Bodleian" --labels=purpose=project
 gcloud beta billing projects link koenighotze-bodleian --billing-account "${BILLING_ACCOUNT}"
+gcloud services enable cloudresourcemanager.googleapis.com  --project koenighotze-bodleian
