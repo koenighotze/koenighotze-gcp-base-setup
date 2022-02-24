@@ -1,0 +1,67 @@
+name: Pull request review
+
+on:
+  pull_request:
+
+jobs:
+  review-markdown:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checking out
+        uses: actions/checkout@v2
+
+      - name: Reviewing markdown files
+        uses: reviewdog/action-markdownlint@v0.1
+        with:
+          reporter: github-pr-review
+          github_token: ${{ secrets.github_token }}
+          level: warning
+          fail_on_error: true
+
+  detect-secrets:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checking out
+        uses: actions/checkout@v2
+
+      - name: Detecting secrets
+        uses: reviewdog/action-detect-secrets@v0.6.0
+        with:
+          reporter: github-pr-review
+          github_token: ${{ secrets.github_token }}
+          detect_secrets_flags: --exclude-files .git
+
+  review-terraform:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checking out
+        uses: actions/checkout@v2
+
+      - name: Reviewing Terraform files
+        uses: reviewdog/action-tflint@v1.13.0
+        with:
+          reporter: github-pr-review
+          github_token: ${{ secrets.github_token }}
+
+      - name: Reviewing security of Terraform files
+        uses: reviewdog/action-tfsec@v1.11.0
+        with:
+          reporter: github-pr-review
+          github_token: ${{ secrets.github_token }}
+          level: info
+
+  review-yaml:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checking out
+        uses: actions/checkout@v2
+
+      - name: Reviewing yaml files
+        uses: reviewdog/action-yamllint@v1.4.0
+        with:
+          reporter: github-pr-review
+          github_token: ${{ secrets.github_token }}
