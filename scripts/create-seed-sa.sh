@@ -7,9 +7,9 @@ SA_ID=koenighotze-seed-sa
 # gcloud iam service-accounts create "$SA_ID" --display-name "Seed account for Koenighotze"  --project "$SEED_PROJECT_ID"
 
 # TODO: replace with custom role
-gcloud projects add-iam-policy-binding "${SEED_PROJECT_ID}" \
-    --member="serviceAccount:${SA_ID}@${SEED_PROJECT_ID}.iam.gserviceaccount.com" \
-    --role="roles/owner"
+# gcloud projects add-iam-policy-binding "${SEED_PROJECT_ID}" \
+#     --member="serviceAccount:${SA_ID}@${SEED_PROJECT_ID}.iam.gserviceaccount.com" \
+#     --role="roles/owner"
 
 gcloud iam service-accounts keys create key-file.json \
     --iam-account="${SA_ID}@${SEED_PROJECT_ID}.iam.gserviceaccount.com"
