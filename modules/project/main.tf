@@ -35,10 +35,12 @@ resource "google_project_iam_audit_config" "audit" {
   }
 }
 
+# checkov:skip=CKV_GCP_62
 resource "google_storage_bucket" "state_bucket" {
   project       = data.google_project.project.id
   name          = "${data.google_project.project.project_id}-state"
   location      = var.location
+  uniform_bucket_level_access = true
 
   versioning {
     enabled = false
@@ -51,6 +53,10 @@ resource "google_service_account" "service_account" {
   project       = data.google_project.project.id
   account_id   = "infra-setup-sa"
   display_name = "Service account for infrastructure activities on this project"
+}
+
+resource "google_service_account_key" "key" {
+  service_account_id = google_service_account.service_account.name
 }
 
 resource "google_service_account_iam_member" "admin_account_iam" {
