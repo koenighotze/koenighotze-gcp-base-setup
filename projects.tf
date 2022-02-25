@@ -3,5 +3,4 @@ module "koenighotze_baseline" {
 
   project_id = "koenighotze-baseline-${random_integer.rand.result}"
   project_name = "Koenighotze Baseline"
-
 }

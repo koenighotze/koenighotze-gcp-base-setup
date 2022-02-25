@@ -33,3 +33,4 @@ pkg/
 .idea
 terraform.tfvars
 *hcl
+key-file.json
