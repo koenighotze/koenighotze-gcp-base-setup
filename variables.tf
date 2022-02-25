@@ -11,6 +11,6 @@ variable "seed_sa_email_address" {
 }
 
 variable "postfix" {
-  default = "72d26c895553"
+  default     = "72d26c895553"
   description = "Project creation random string"
 }
