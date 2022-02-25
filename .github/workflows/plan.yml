@@ -90,3 +90,4 @@ jobs:
         run: terraform plan -no-color
         env:
           TF_VAR_billing_account_id: "${{ secrets.BILLING_ACCOUNT_ID }}"
+          TF_VAR_seed_sa_email_address: "${{ secrets.SEED_SA_EMAIL_ADDRESS }}"
