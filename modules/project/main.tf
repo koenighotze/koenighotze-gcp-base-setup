@@ -35,7 +35,7 @@ resource "google_project_iam_audit_config" "audit" {
   }
 }
 
-# checkov:skip=CKV_GCP_62
+#checkov:skip=CKV_GCP_62:Logging deactivated for now
 resource "google_storage_bucket" "state_bucket" {
   project       = data.google_project.project.id
   name          = "${data.google_project.project.project_id}-state"
