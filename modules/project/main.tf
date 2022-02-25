@@ -34,3 +34,28 @@ resource "google_project_iam_audit_config" "audit" {
     log_type = "DATA_READ"
   }
 }
+
+resource "google_storage_bucket" "state_bucket" {
+  project       = data.google_project.project.id
+  name          = "${data.google_project.project.project_id}-state"
+  location      = var.location
+
+  versioning {
+    enabled = false
+  }
+
+  # labels = merge(local.common_labels, { name = "${var.environment}-rtb" })
+}
+
+resource "google_service_account" "service_account" {
+  project       = data.google_project.project.id
+  account_id   = "infra-setup-sa"
+  display_name = "Service account for infrastructure activities on this project"
+}
+
+resource "google_service_account_iam_member" "admin_account_iam" {
+  service_account_id = google_service_account.service_account.name
+  # TODO reduce privileges
+  role               = "roles/owner"
+  member             = "serviceAccount:${google_service_account.service_account.email}"
+}

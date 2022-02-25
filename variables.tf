@@ -14,3 +14,11 @@ variable "postfix" {
   default     = "72d26c895553"
   description = "Project creation random string"
 }
+
+variable "region" {
+  default = "europe-west3"
+}
+
+variable "environment" {
+  default = "dev"
+}

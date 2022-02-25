@@ -4,6 +4,10 @@ variable "project_id" {
   description = "The id of the project"
 }
 
+variable "location" {
+  default = "europe-west3"
+}
+
 # variable "project_name" {
 #   type        = string
 #   sensitive   = false
