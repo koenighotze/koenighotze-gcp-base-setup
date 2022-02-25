@@ -7,6 +7,7 @@ BILLING_ACCOUNT=${1?Billing account missing}
 # we use gcloud cli for the time being
 gcloud projects create koenighotze-seed --name="Koenighotze Seed" --labels=purpose=seed
 gcloud beta billing projects link koenighotze-seed --billing-account "${BILLING_ACCOUNT}"
-gcloud services enable cloudresourcemanager.googleapis.com  --project koenighotze-seed
-gcloud services enable cloudbilling.googleapis.com  --project koenighotze-seed
+gcloud services enable cloudresourcemanager.googleapis.com --project koenighotze-seed
+gcloud services enable cloudbilling.googleapis.com --project koenighotze-seed
+gcloud services enable iam.googleapis.com --project koenighotze-seed
 gsutil mb -l europe-west3 -p koenighotze-seed gs://koenighotze-seed
