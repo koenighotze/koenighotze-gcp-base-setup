@@ -9,3 +9,8 @@ variable "seed_sa_email_address" {
   sensitive   = true
   description = "Email address of the service account"
 }
+
+variable "postfix" {
+  default = "72d26c895553"
+  description = "Project creation random string"
+}
