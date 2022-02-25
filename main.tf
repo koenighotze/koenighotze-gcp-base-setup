@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket = "koenighotze-baseline"
+    bucket = "koenighotze-seed"
     prefix = "terraform/baseline/state"
   }
 }
