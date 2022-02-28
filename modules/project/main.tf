@@ -16,14 +16,14 @@ locals {
 
 resource "google_project_service" "common_project_services" {
   for_each                   = toset(local.common_apis)
-  project                    = data.google_project.project.project_id
+  project                    = var.project_id
   service                    = each.value
   disable_on_destroy         = true
   disable_dependent_services = true
 }
 
 resource "google_project_iam_audit_config" "audit" {
-  project = data.google_project.project.id
+  project = var.project_id
   service = "allServices"
 
   audit_log_config {
@@ -37,8 +37,8 @@ resource "google_project_iam_audit_config" "audit" {
 
 resource "google_storage_bucket" "state_bucket" {
   #checkov:skip=CKV_GCP_62:Logging deactivated for now
-  project       = data.google_project.project.id
-  name          = "${data.google_project.project.project_id}-state"
+  project       = var.project_id
+  name          = "${var.project_id}-state"
   location      = var.location
   uniform_bucket_level_access = true
 
@@ -49,19 +49,19 @@ resource "google_storage_bucket" "state_bucket" {
   # labels = merge(local.common_labels, { name = "${var.environment}-rtb" })
 }
 
-resource "google_service_account" "service_account" {
-  project       = data.google_project.project.id
-  account_id   = "infra-setup-sa"
-  display_name = "Service account for infrastructure activities on this project"
-}
+# resource "google_service_account" "service_account" {
+#   project       = data.google_project.project.id
+#   account_id   = "infra-setup-sa"
+#   display_name = "Service account for infrastructure activities on this project"
+# }
 
-resource "google_service_account_key" "key" {
-  service_account_id = google_service_account.service_account.name
-}
+# resource "google_service_account_key" "key" {
+#   service_account_id = google_service_account.service_account.name
+# }
 
-resource "google_service_account_iam_member" "admin_account_iam" {
-  service_account_id = google_service_account.service_account.name
-  # TODO reduce privileges
-  role               = "roles/owner"
-  member             = "serviceAccount:${google_service_account.service_account.email}"
-}
+# resource "google_service_account_iam_member" "admin_account_iam" {
+#   service_account_id = google_service_account.service_account.name
+#   # TODO reduce privileges
+#   role               = "roles/owner"
+#   member             = "serviceAccount:${google_service_account.service_account.email}"
+# }
