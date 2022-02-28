@@ -4,6 +4,12 @@ locals {
     "billingbudgets.googleapis.com",
     "cloudbilling.googleapis.com"
   ]
+
+  project_roles = [
+    "roles/logging.logWriter",
+    "roles/run.admin",
+    "roles/storage.objectAdmin"
+  ]
 }
 
 # This is created by gcloud cli, because Terraform / Service accounts need an organization
@@ -60,8 +66,9 @@ resource "google_service_account_key" "key" {
 }
 
 resource "google_project_iam_binding" "iam_binding_project" {
-  project = var.project_id
-  role    = "roles/editor"
+  for_each = toset(local.project_roles)
+  project  = var.project_id
+  role     = each.value
 
   members = [
     "serviceAccount:${google_service_account.service_account.email}"
