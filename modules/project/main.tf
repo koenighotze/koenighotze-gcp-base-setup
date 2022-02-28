@@ -49,19 +49,21 @@ resource "google_storage_bucket" "state_bucket" {
   # labels = merge(local.common_labels, { name = "${var.environment}-rtb" })
 }
 
-# resource "google_service_account" "service_account" {
-#   project       = data.google_project.project.id
-#   account_id   = "infra-setup-sa"
-#   display_name = "Service account for infrastructure activities on this project"
-# }
+resource "google_service_account" "service_account" {
+  project      = var.project_id
+  account_id   = "infra-setup-sa"
+  display_name = "Service account for infrastructure activities on this project"
+}
 
-# resource "google_service_account_key" "key" {
-#   service_account_id = google_service_account.service_account.name
-# }
+resource "google_service_account_key" "key" {
+  project            = var.project_id
+  service_account_id = google_service_account.service_account.name
+}
 
-# resource "google_service_account_iam_member" "admin_account_iam" {
-#   service_account_id = google_service_account.service_account.name
-#   # TODO reduce privileges
-#   role               = "roles/owner"
-#   member             = "serviceAccount:${google_service_account.service_account.email}"
-# }
+resource "google_service_account_iam_member" "admin_account_iam" {
+  project            = var.project_id
+  service_account_id = google_service_account.service_account.name
+  # TODO reduce privileges
+  role   = "roles/owner"
+  member = "serviceAccount:${google_service_account.service_account.email}"
+}
