@@ -59,9 +59,17 @@ resource "google_service_account_key" "key" {
   service_account_id = google_service_account.service_account.name
 }
 
-resource "google_service_account_iam_member" "admin_account_iam" {
-  service_account_id = google_service_account.service_account.name
-  # TODO reduce privileges
-  role   = "roles/owner"
-  member = "serviceAccount:${google_service_account.service_account.email}"
+resource "google_project_iam_binding" "iam_binding_project" {
+  project = var.project_id
+  role    = "roles/editor"
+
+  members = [
+    "serviceAccount:${google_service_account.service_account.email}"
+  ]
+}
+
+esource "google_service_account_iam_member" "gce-default-account-iam" {
+  service_account_id = data.google_compute_default_service_account.default.name
+  role               = "roles/iam.serviceAccountUser"
+  member             = "serviceAccount:${google_service_account.sa.email}"
 }
