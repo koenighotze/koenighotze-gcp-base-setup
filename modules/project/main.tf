@@ -37,9 +37,9 @@ resource "google_project_iam_audit_config" "audit" {
 
 resource "google_storage_bucket" "state_bucket" {
   #checkov:skip=CKV_GCP_62:Logging deactivated for now
-  project       = var.project_id
-  name          = "${var.project_id}-state"
-  location      = var.location
+  project                     = var.project_id
+  name                        = "${var.project_id}-state"
+  location                    = var.location
   uniform_bucket_level_access = true
 
   versioning {
