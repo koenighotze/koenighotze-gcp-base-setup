@@ -56,12 +56,10 @@ resource "google_service_account" "service_account" {
 }
 
 resource "google_service_account_key" "key" {
-  project            = var.project_id
   service_account_id = google_service_account.service_account.name
 }
 
 resource "google_service_account_iam_member" "admin_account_iam" {
-  project            = var.project_id
   service_account_id = google_service_account.service_account.name
   # TODO reduce privileges
   role   = "roles/owner"
