@@ -6,9 +6,7 @@ locals {
   ]
 
   project_roles = [
-    "roles/logging.logWriter",
-    "roles/run.admin",
-    "roles/storage.objectAdmin"
+    "roles/logging.logWriter"
   ]
 }
 
@@ -51,8 +49,12 @@ resource "google_storage_bucket" "state_bucket" {
   versioning {
     enabled = false
   }
+}
 
-  # labels = merge(local.common_labels, { name = "${var.environment}-rtb" })
+resource "google_storage_bucket_iam_member" "bucket_iam_member" {
+  bucket = google_storage_bucket.state_bucket.name
+  role = "roles/storage.admin"
+  member = "serviceAccount:${google_service_account.service_account.email}"
 }
 
 resource "google_service_account" "service_account" {
