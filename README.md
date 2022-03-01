@@ -23,5 +23,5 @@ graph LR;
 
     SeedSA-- usedIn -->GitHubActions;
     GitHubActions-- terraforms -->Billing;
-    GitHubActions-- terraforms -->ProjectSAs & Projects & ProjectStateBuckets;
+    GitHubActions-- terraforms -->ProjectSAs & Projects & ProjectStateBuckets & ProjectInfraRepository;
 ```

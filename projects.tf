@@ -10,5 +10,5 @@ module "koenighotze_baseline" {
   source   = "./modules/project"
 
   project_id = "${each.value}-${var.postfix}"
-  # project_name = "Koenighotze Baseline"
+  project_name = each.value
 }
