@@ -6,6 +6,7 @@ resource "github_repository" "infrastructure_repository" {
   name        = local.repository_name
   description = "Infrastructure for ${var.project_name}"
 
+  #tfsec:ignore:github-repositories-private
   visibility = "public"
 }
 
