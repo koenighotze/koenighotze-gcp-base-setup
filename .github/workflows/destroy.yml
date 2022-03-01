@@ -1,0 +1,29 @@
+name: Apply
+
+on:
+  workflow_dispatch:
+
+env:
+  TF_VAR_billing_account_id: "${{ secrets.BILLING_ACCOUNT_ID }}"
+  TF_VAR_seed_sa_email_address: "${{ secrets.SEED_SA_EMAIL_ADDRESS }}"
+
+jobs:
+  apply:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setting up GCP environment
+        uses: google-github-actions/setup-gcloud@v0.5.1
+        with:
+        # TODO
+        #   workload_identity_provider: 'projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
+        #   service_account: 'my-service-account@my-project.iam.gserviceaccount.com'
+          service_account_key: "${{ secrets.GCP_SEED_SA_KEY }}"
+          export_default_credentials: true
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+      - name: Init
+        run: terraform init
+      - name: Apply
+        run: terraform destroy --auto-approve

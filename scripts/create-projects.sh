@@ -9,7 +9,7 @@ SERVICE_ACCOUNT_EMAIL_ADDRESS=${2?Service account email address}
 # we use gcloud cli for the time being
 for name in bodleian platform; do
     echo "Project: $name"
-    projectId="${name}-72d26c895553"
+    projectId="${name}-${POSTFIX}"
     gcloud projects create "${projectId}" --name="Koenighotze $name"
     gcloud beta billing projects link "${projectId}" --billing-account "${BILLING_ACCOUNT}"
     gcloud projects add-iam-policy-binding "${projectId}" \
