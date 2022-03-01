@@ -1,4 +1,4 @@
-name: Plan infrastructure
+name: Plan
 
 on:
   push:
