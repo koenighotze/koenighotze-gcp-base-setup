@@ -8,4 +8,12 @@ graph LR;
     GitHubActions-- uses -->SeedSA;
     GitHubActions-- terraforms -->Billing;
     GitHubActions-- terraforms -->ProjectSAs & Projects & ProjectStateBuckets;
+
+    SeedSA-. creates .->ProjectSAs;
+    SeedSA-. creates .->Projects;
+    SeedSA-. creates .->ProjectStateBuckets;
+
+    ProjectSAs-. edits .->ProjectSAs;
+    ProjectSAs-. edits .->Projects;
+    ProjectSAs-. edits .->ProjectStateBuckets;
 ```
