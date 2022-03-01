@@ -21,7 +21,7 @@ The automation works as follows
 graph LR;
     CLI-- creates -->Seedproject & SeedSA;
 
-    GitHubActions-- uses -->SeedSA;
+    SeedSA-- usedIn -->GitHubActions;
     GitHubActions-- terraforms -->Billing;
     GitHubActions-- terraforms -->ProjectSAs & Projects & ProjectStateBuckets;
 ```
