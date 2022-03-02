@@ -25,6 +25,6 @@ variable "github_admin_token" {
 }
 
 variable "project_postfix" {
-  type = string
+  type        = string
   description = "The unique postfix for the projects"
 }
