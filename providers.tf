@@ -3,4 +3,5 @@ provider "google" {
 }
 
 provider "github" {
+  token = var.github_admin_token
 }
