@@ -22,3 +22,9 @@ variable "region" {
 variable "environment" {
   default = "dev"
 }
+
+variable "github_admin_token" {
+  type        = string
+  sensitive   = true
+  description = "The API Token for the GitHub API"
+}

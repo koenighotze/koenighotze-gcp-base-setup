@@ -17,3 +17,9 @@ variable "project_name" {
 variable "github_org_name" {
   default = "koenighotze"
 }
+
+variable "github_admin_token" {
+  type        = string
+  sensitive   = true
+  description = "The API Token for the GitHub API"
+}
