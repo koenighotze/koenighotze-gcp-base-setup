@@ -9,7 +9,7 @@ env:
   TF_VAR_github_admin_token: "${{ secrets.ADMIN_GITHUB_TOKEN }}"
 
 jobs:
-  apply:
+  destroy:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout

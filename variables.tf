@@ -10,11 +10,6 @@ variable "seed_sa_email_address" {
   description = "Email address of the service account"
 }
 
-variable "postfix" {
-  default     = "72d26c895553"
-  description = "Project creation random string"
-}
-
 variable "region" {
   default = "europe-west3"
 }
