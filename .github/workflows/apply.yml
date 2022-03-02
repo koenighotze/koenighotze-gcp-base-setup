@@ -27,3 +27,6 @@ jobs:
         run: terraform init
       - name: Apply
         run: terraform apply --auto-approve
+        env:
+          GITHUB_OWNER: koenighotze
+          GITHUB_TOKEN: "${{ secrets.ADMIN_GITHUB_TOKEN }}"
