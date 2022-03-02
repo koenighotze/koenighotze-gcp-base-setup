@@ -23,3 +23,8 @@ variable "github_admin_token" {
   sensitive   = true
   description = "The API Token for the GitHub API"
 }
+
+variable "project_postfix" {
+  type = string
+  description = "The unique postfix for the projects"
+}
