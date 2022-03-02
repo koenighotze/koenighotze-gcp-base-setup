@@ -1,5 +1,5 @@
 locals {
-  repository_name = "${var.github_org_name}/${var.project_name}-infrastructure-tmp"
+  repository_name = "${var.project_name}-infrastructure-tmp"
 }
 
 
