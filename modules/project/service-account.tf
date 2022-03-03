@@ -1,6 +1,7 @@
 locals {
   project_roles = [
-    "roles/logging.logWriter"
+    "roles/logging.logWriter",
+    "roles/viewer"
   ]
 }
 
