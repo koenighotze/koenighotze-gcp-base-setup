@@ -44,15 +44,15 @@ resource "github_actions_secret" "github_api_token" {
   plaintext_value = var.github_admin_token
 }
 
-resource "github_branch_protection" "main" {
-  repository_id = github_repository.infrastructure_repository.id
+# resource "github_branch_protection" "main" {
+#   repository_id = github_repository.infrastructure_repository.id
 
-  pattern                         = "main"
-  enforce_admins                  = false
-  allows_deletions                = false
-  require_conversation_resolution = true
-  allows_force_pushes             = false
-}
+#   pattern                         = "main"
+#   enforce_admins                  = false
+#   allows_deletions                = false
+#   require_conversation_resolution = true
+#   allows_force_pushes             = false
+# }
 
 # resource "github_actions_secret" "docker_registry_token" {
 #   repository      = github_repository.infrastructure_repository.id
