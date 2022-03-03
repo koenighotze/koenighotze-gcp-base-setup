@@ -1,6 +1,5 @@
 locals {
   project_names = [
-    "platform",
     "bodleian"
   ]
 }
