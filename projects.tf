@@ -6,7 +6,7 @@ locals {
 
 module "koenighotze_baseline" {
   for_each = toset(local.project_names)
-  source   = "./modules/project"
+  source   = "koenighotze/gcp-tf-modules/infrastructure-project"
 
   project_id         = "${each.value}-${var.project_postfix}"
   project_name       = each.value

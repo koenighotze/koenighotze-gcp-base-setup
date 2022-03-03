@@ -1,7 +1,9 @@
 locals {
   project_roles = [
     "roles/logging.logWriter",
-    "roles/viewer"
+    "roles/viewer",
+    "roles/iam.serviceAccountCreator",
+    "roles/iam.serviceAccountKeyAdmin"
   ]
 }
 
