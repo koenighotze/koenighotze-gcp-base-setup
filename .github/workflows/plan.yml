@@ -94,4 +94,4 @@ jobs:
       - name: Plan
         run: terraform plan -no-color
         env:
-          TF_LOG: true
+          TF_LOG: "INFO"
