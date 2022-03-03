@@ -93,3 +93,5 @@ jobs:
         run: terraform init
       - name: Plan
         run: terraform plan -no-color
+        env:
+          TF_LOG: true
