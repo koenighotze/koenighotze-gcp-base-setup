@@ -7,6 +7,9 @@ on:
 permissions:
   id-token: write
 
+env:
+  CLOUDSDK_CORE_PROJECT: ${{ secrets.BASELINE_PROJECT_ID }}
+
 jobs:
   Get_OIDC_ID_token:
     runs-on: ubuntu-latest
