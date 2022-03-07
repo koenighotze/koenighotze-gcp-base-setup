@@ -1,9 +1,10 @@
 name: Plan
 
 on:
-  push:
-    branches: ["**"]
-    tags-ignore: ["**"]
+  # deactivated while playing with workload identities
+  # push:
+  #   branches: ["**"]
+  #   tags-ignore: ["**"]
   workflow_dispatch:
 
 env:
