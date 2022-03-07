@@ -3,6 +3,10 @@ name: Wi-Test
 on:
   workflow_dispatch:
 
+permissions:
+  id-token: write
+  # contents: read
+
 env:
   WORKLOAD_IDENTITY_PROVIDER: "projects/577705814230/locations/global/workloadIdentityPools/my-pool/providers/my-provider"
   TF_VAR_billing_account_id: "${{ secrets.BILLING_ACCOUNT_ID }}"
@@ -15,9 +19,7 @@ env:
 jobs:
   plan:
     runs-on: ubuntu-20.04
-    permissions:
-      contents: 'read'
-      id-token: 'write'
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
