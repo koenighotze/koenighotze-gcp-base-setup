@@ -1,0 +1,72 @@
+name: Receive pull request
+
+on:
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: terraform-linters/setup-tflint@v1
+        name: Setting up TFLint
+        with:
+          tflint_version: v0.29.0
+
+      - name: Initializing TFLint
+        run: tflint --init
+
+      - name: Linting
+        run: tflint -f compact
+
+  qa:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1.3.2
+
+      - name: Terraform Format
+        run: terraform fmt -check -recursive
+
+      - uses: terraform-linters/setup-tflint@v1
+        name: Setting up TFLint
+        with:
+          tflint_version: v0.29.0
+
+      - name: Initializing TFLint
+        run: tflint --init
+
+      - name: Linting
+        run: tflint -f compact
+
+  mark-pr:
+    needs:
+      - lint
+      - qa
+
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions-ecosystem/action-add-labels@v1.1.0
+        with:
+          labels: |
+            linted
+            qaed
+            ready-for-review
+      # - name: Save PR number
+      #   run: |
+      #     mkdir -p ./pr
+      #     echo ${{ github.event.number }} > ./pr/NR
+
+      # - uses: actions/upload-artifact@v2
+      #   with:
+      #     name: pr
+      #     path: pr/
+

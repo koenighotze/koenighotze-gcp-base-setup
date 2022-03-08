@@ -30,5 +30,6 @@ gcloud beta billing accounts add-iam-policy-binding "${BILLING_ACCOUNT}"  \
     --member="serviceAccount:koenighotze-seed-sa@koenighotze-seed.iam.gserviceaccount.com" \
     --role="roles/billing.admin"
 
-gh secret set GCP_SEED_SA_KEY -R "${SEED_REPOSITORY}" < key-file.json
+# we don't use keys anymore, but use workload identity
+# gh secret set GCP_SEED_SA_KEY -R "${SEED_REPOSITORY}" < key-file.json
 gh secret set SEED_SA_EMAIL_ADDRESS -R "${SEED_REPOSITORY}" -b "${SA_EMAIL}"

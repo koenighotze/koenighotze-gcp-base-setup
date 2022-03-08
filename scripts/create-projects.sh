@@ -12,6 +12,7 @@ SEED_REPOSITORY=koenighotze/koenighotze-gcp-base-setup
 for projectId in bodleian platform; do
     projectId="${projectId}-${POSTFIX}"
     echo "Project: $projectId"
+    # TODO remove auto create default network
     gcloud projects create "${projectId}" --name="Koenighotze $projectId"
     gcloud beta billing projects link "${projectId}" --billing-account "${BILLING_ACCOUNT}"
     gcloud projects add-iam-policy-binding "${projectId}" \
