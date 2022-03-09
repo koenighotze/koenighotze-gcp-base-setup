@@ -11,6 +11,8 @@ env:
   TF_VAR_seed_sa_email_address: "${{ secrets.SEED_SA_EMAIL_ADDRESS }}"
   TF_VAR_github_admin_token: "${{ secrets.ADMIN_GITHUB_TOKEN }}"
   TF_VAR_project_postfix: "${{ secrets.GCP_PROJECT_POSTFIX }}"
+  TF_VAR_workload_identity_provider_name: "${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}"
+  TF_VAR_workload_identity_pool_id: "${{ secrets.WORKLOAD_IDENTITY_POOL_ID }}"
   TF_IN_AUTOMATION: "true"
   GITHUB_TOKEN: "${{ secrets.ADMIN_GITHUB_TOKEN }}"
   CLOUDSDK_CORE_PROJECT: ${{ secrets.BASELINE_PROJECT_ID }}
