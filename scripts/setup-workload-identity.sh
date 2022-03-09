@@ -41,4 +41,6 @@ WORKLOAD_IDENTITY_PROVIDER=$(gcloud iam workload-identity-pools providers descri
 echo "Use the following id as the workload_identity_provider in GitHub actions workflows"
 echo "$WORKLOAD_IDENTITY_PROVIDER"
 
-gh secret set WORKLOAD_IDENTITY_PROVIDER -R "${REPO}" -b "${WORKLOAD_IDENTITY_PROVIDER}"
+gh secret set WORKLOAD_IDENTITY_PROVIDER -R "$REPO" -b "$WORKLOAD_IDENTITY_PROVIDER"
+gh secret set WORKLOAD_IDENTITY_POOL_ID -R "$REPO" -b "$WORKLOAD_IDENTITY_POOL_ID"
+
