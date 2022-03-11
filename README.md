@@ -1,7 +1,7 @@
 # Base infrastructure for Koenighotze on Google Cloud Platform
 
 [![Plan](https://github.com/koenighotze/koenighotze-gcp-base-setup/actions/workflows/plan.yml/badge.svg)](https://github.com/koenighotze/koenighotze-gcp-base-setup/actions/workflows/plan.yml)
-[![.github/workflows/apply.yml](https://github.com/koenighotze/koenighotze-gcp-base-setup/actions/workflows/apply.yml/badge.svg)](https://github.com/koenighotze/koenighotze-gcp-base-setup/actions/workflows/apply.yml)
+[![Apply](https://github.com/koenighotze/koenighotze-gcp-base-setup/actions/workflows/apply.yml/badge.svg)](https://github.com/koenighotze/koenighotze-gcp-base-setup/actions/workflows/apply.yml)
 
 
 Target structure is as follows:
