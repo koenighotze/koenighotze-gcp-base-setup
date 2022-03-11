@@ -14,13 +14,27 @@ env:
   TF_INPUT: "false"
   TF_IN_AUTOMATION: "true"
   GITHUB_TOKEN: "${{ secrets.ADMIN_GITHUB_TOKEN }}"
+  CLOUDSDK_CORE_PROJECT: ${{ secrets.BASELINE_PROJECT_ID }}
 
 permissions:
   id-token: write
 
 jobs:
+  security-scan:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Scan
+        run: docker run -v ${PWD}:/src aquasec/tfsec:v1.8 /src
+
   apply:
     runs-on: ubuntu-20.04
+
+    needs:
+      - security-scan
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -37,8 +51,5 @@ jobs:
         uses: hashicorp/setup-terraform@v1
       - name: Init
         run: terraform init
-      - uses: actions/checkout@v3
-      - name: Scanning security
-        run: docker run -v ${PWD}:/src aquasec/tfsec:v1.8 /src
       - name: Apply
         run: terraform apply --auto-approve
