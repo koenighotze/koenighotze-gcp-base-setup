@@ -24,6 +24,12 @@ variable "github_admin_token" {
   description = "The API Token for the GitHub API"
 }
 
+variable "github_api_label_token" {
+  type        = string
+  sensitive   = true
+  description = "The API Token for the GitHub API used in pull requests"
+}
+
 variable "project_postfix" {
   type        = string
   description = "The unique postfix for the projects"
