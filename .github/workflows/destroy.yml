@@ -11,6 +11,7 @@ env:
   TF_VAR_project_postfix: "${{ secrets.GCP_PROJECT_POSTFIX }}"
   TF_VAR_workload_identity_provider_name: "${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}"
   TF_VAR_workload_identity_pool_id: "${{ secrets.WORKLOAD_IDENTITY_POOL_ID }}"
+  TF_INPUT: "false"
   TF_IN_AUTOMATION: "true"
   GITHUB_TOKEN: "${{ secrets.ADMIN_GITHUB_TOKEN }}"
 
