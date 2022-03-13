@@ -44,3 +44,21 @@ variable "workload_identity_pool_id" {
   type        = string
   description = "The id of the workload identity pool"
 }
+
+variable "codacy_api_token" {
+  type        = string
+  sensitive   = true
+  description = "The API token for uploading coverage data"
+}
+
+variable "docker_registry_username" {
+  type        = string
+  sensitive   = true
+  description = "The username for uploading images to docker hub"
+}
+
+variable "docker_registry_token" {
+  type        = string
+  sensitive   = true
+  description = "The API token for uploading images to docker hub"
+}

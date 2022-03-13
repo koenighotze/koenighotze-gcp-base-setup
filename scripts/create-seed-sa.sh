@@ -17,7 +17,7 @@ gcloud projects add-iam-policy-binding "${SEED_PROJECT}"
     --member="serviceAccount:${SA_EMAIL}" \
     --role="roles/owner"
 
-echo gcloud projects add-iam-policy-binding \
+gcloud projects add-iam-policy-binding \
     "$SEED_PROJECT" \
     --member="serviceAccount:$SA_EMAIL" \
     --role="roles/iam.serviceAccountCreator"

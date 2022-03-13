@@ -24,5 +24,6 @@ for projectId in bodleian platform; do
     gcloud services enable iam.googleapis.com --project "${projectId}"
 done
 
+# this is used to find downstream projects
 gh secret set GCP_PROJECT_POSTFIX -R "${SEED_REPOSITORY}" -b "${POSTFIX}"
 echo "Overall id is ${POSTFIX}. Use this when deleting."
