@@ -1,3 +1,3 @@
 data "google_project" "seed_project" {
-  project_id = "koenighotze_seed"
+  project_id = "koenighotze-seed"
 }
