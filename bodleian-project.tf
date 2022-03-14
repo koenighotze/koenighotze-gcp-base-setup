@@ -17,9 +17,9 @@ module "bodleian_project" {
 }
 
 resource "google_project_service" "bodleian_project_services" {
-  for_each = [
+  for_each = toset([
     "run.googleapis.com"
-  ]
+  ])
 
   project = data.google_project.bodleian_project.project_id
   service = each.value
