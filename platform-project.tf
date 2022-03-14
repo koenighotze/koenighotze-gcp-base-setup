@@ -1,32 +1,16 @@
-# locals {
-#   project_id = "platform-${var.project_postfix}"
-# }
+resource "google_container_registry" "container_registry" {
+  project  = data.google_project.platform_project
+  location = "EU"
+}
 
-# module "platform_project" {
-#   # tflint-ignore: terraform_module_pinned_source
-#   source = "github.com/koenighotze/gcp-tf-modules/infrastructure-project"
-
-#   project_id                      = local.project_id
-#   project_name                    = "Platform"
-#   github_admin_token              = ""
-#   github_api_label_token          = ""
-#   workload_identity_provider_name = var.workload_identity_provider_name
-#   workload_identity_pool_id       = var.workload_identity_pool_id
-
-#   codacy_api_token         = ""
-#   docker_registry_username = ""
-#   docker_registry_token    = ""
-# }
-
-# # GCR
-# resource "google_container_registry" "registry" {
-#   project  = local.project_id
-#   location = "EU"
-# }
+#tfsec:ignore:google-iam-no-privileged-service-accounts
+resource "google_storage_bucket_iam_member" "viewer" {
+  project = data.google_project.platform_project
+  bucket  = google_container_registry.container_registry.id
+  role    = "roles/storage.objectAdmin"
+  members = [
+    "serviceAccount:${module.bodleian_service_deployer_service_account.service_email}"
+  ]
+}
 
 
-
-# # Platform:
-# # - GCR
-# # - Cloud Build
-# # - Monitoring?

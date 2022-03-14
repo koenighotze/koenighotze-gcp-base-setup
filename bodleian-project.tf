@@ -15,3 +15,18 @@ module "bodleian_project" {
 
   service_account_email = google_service_account.bodleian_infrastructure_service_account.email
 }
+
+resource "google_project_service" "bodleian_project_services" {
+  for_each = [
+    "run.googleapis.com"
+  ]
+
+  project = data.google_project.bodleian_project.project_id
+  service = each.value
+}
+
+
+
+
+
+
