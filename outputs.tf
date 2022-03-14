@@ -3,7 +3,7 @@ output "overall_budget_id" {
 }
 
 output "bodleian_infrastructure_service_account_email" {
-  value = google_service_account.bodleian_service_account.email
+  value = google_service_account.bodleian_infrastructure_service_account.email
 }
 
 output "bodleian_service_deployer_service_account_email" {
