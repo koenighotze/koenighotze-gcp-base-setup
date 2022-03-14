@@ -8,6 +8,10 @@ resource "google_project_service" "platform_project_services" {
 }
 
 resource "google_container_registry" "container_registry" {
+  depends_on = [
+    google_project_service.platform_project_services
+  ]
+
   project  = data.google_project.platform_project.project_id
   location = "EU"
 }
