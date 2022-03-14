@@ -42,7 +42,7 @@ module "bodleian_service_deployer_service_account" {
 resource "google_service_account_iam_binding" "workload_identity_sa_binding" {
   # this list must contain all repositories and their respective service account
   for_each = {
-    module.bodleian_service_deployer_service_account.service_account_id = "koenighotze/bodleian-service-tmp"
+    (module.bodleian_service_deployer_service_account.service_account_id) = "koenighotze/bodleian-service-tmp"
   }
 
   service_account_id = each.key
