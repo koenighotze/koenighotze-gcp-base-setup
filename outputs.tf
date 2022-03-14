@@ -7,7 +7,7 @@ output "bodleian_infrastructure_service_account_email" {
 }
 
 output "bodleian_service_deployer_service_account_email" {
-  value = google_service_account.bodleian_service_deployer_service_account.email
+  value = module.bodleian_service_deployer_service_account.email
 }
 
 # output "platform_service_account_email" {

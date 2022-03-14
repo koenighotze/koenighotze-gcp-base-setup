@@ -25,7 +25,7 @@ resource "google_project_iam_binding" "bodleian_infrastructure_service_accountia
   role     = each.value
 
   members = [
-    "serviceAccount:${google_service_account.bodleian_service_account.email}"
+    "serviceAccount:${google_service_account.bodleian_infrastructure_service_account.email}"
   ]
 }
 
