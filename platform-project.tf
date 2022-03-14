@@ -1,3 +1,12 @@
+resource "google_project_service" "platform_project_services" {
+  for_each = toset([
+    "containerregistry.googleapis.com"
+  ])
+
+  project = data.google_project.platform_project.project_id
+  service = each.value
+}
+
 resource "google_container_registry" "container_registry" {
   project  = data.google_project.platform_project.project_id
   location = "EU"
