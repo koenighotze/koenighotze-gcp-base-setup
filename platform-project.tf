@@ -1,5 +1,5 @@
 resource "google_container_registry" "container_registry" {
-  project  = data.google_project.platform_project
+  project  = data.google_project.platform_project.project_id
   location = "EU"
 }
 
