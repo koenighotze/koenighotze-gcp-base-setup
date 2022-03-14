@@ -12,7 +12,7 @@ module "bodleian_project" {
   codacy_api_token         = var.codacy_api_token
   docker_registry_username = var.docker_registry_username
   docker_registry_token    = var.docker_registry_token
-  container_registry       = "eu.gcr.io/${data.google_project.platform.project_id}"
+  container_registry       = "eu.gcr.io/${data.google_project.platform_project.project_id}"
 
   service_account_email = google_service_account.bodleian_infrastructure_service_account.email
 }
