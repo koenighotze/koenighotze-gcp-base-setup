@@ -10,7 +10,7 @@ locals {
   project_id = "bodleian-${var.project_postfix}"
 }
 
-resource "google_service_account" "bodleian_service_account" {
+resource "google_service_account" "bodleian_infrastructure_service_account" {
   project      = local.project_id
   account_id   = "infra-setup-sa"
   display_name = "Infrastructure Setup Service Account"
@@ -19,7 +19,7 @@ resource "google_service_account" "bodleian_service_account" {
 
 # This SA needs to be able to do some privileged work
 #tfsec:ignore:google-iam-no-privileged-service-accounts
-resource "google_project_iam_binding" "iam_binding_project" {
+resource "google_project_iam_binding" "bodleian_infrastructure_service_accountiam_binding_project" {
   for_each = toset(local.project_roles)
   project  = local.project_id
   role     = each.value
@@ -30,7 +30,7 @@ resource "google_project_iam_binding" "iam_binding_project" {
 }
 
 # This SA is used by the bodleian-service to deploy resources
-module "service_repository_deployer_sa" {
+module "bodleian_service_deployer_service_account" {
   source = "github.com/koenighotze/gcp-tf-modules/deployer-service-account"
 
   name        = "bodleian-service-tmp"
