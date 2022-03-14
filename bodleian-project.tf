@@ -2,7 +2,7 @@ module "bodleian_project" {
   # tflint-ignore: terraform_module_pinned_source
   source = "github.com/koenighotze/gcp-tf-modules/infrastructure-project"
 
-  project_id                      = data.google_project.bodleian_project.projet_id
+  project_id                      = data.google_project.bodleian_project.project_id
   project_name                    = "bodleian"
   github_admin_token              = var.github_admin_token
   github_api_label_token          = var.github_api_label_token
