@@ -28,3 +28,12 @@ resource "google_project_iam_binding" "iam_binding_project" {
     "serviceAccount:${google_service_account.bodleian_service_account.email}"
   ]
 }
+
+# This SA is used by the bodleian-service to deploy resources
+module "service_repository_deployer_sa" {
+  source = "github.com/koenighotze/gcp-tf-modules/deployer-service-account"
+
+  name        = "bodleian-service-tmp"
+  description = "This service account handles deployments"
+  project_id  = local.project_id
+}

@@ -13,5 +13,5 @@ module "bodleian_project" {
   docker_registry_username = var.docker_registry_username
   docker_registry_token    = var.docker_registry_token
 
-  service_account_email = google_service_account.bodleian_service_account.email
+  service_account_email = google_service_account.bodleian_infrastructure_service_account.email
 }
