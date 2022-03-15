@@ -24,12 +24,14 @@ resource "google_storage_bucket_iam_binding" "bodleian_service_deployer_gcr_iam_
   ])
 
   bucket = google_container_registry.container_registry.id
-  role   = "roles/storage.objectAdmin"
+  role   = each.value
   members = [
     "serviceAccount:${module.bodleian_service_deployer_service_account.service_account_email}"
   ]
 }
 
 # TODO set ACL on bucket!
+# get bucket via data
+# set acl
 
 
