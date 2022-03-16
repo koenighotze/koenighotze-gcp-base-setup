@@ -11,6 +11,7 @@ resource "google_artifact_registry_repository" "docker" {
 
 resource "google_artifact_registry_repository_iam_binding" "service_deployer_artifact_registry_iam_binding" {
   provider = google-beta
+  project  = data.google_project.platform_project.project_id
 
   for_each = toset([
     "roles/artifactregistry.reader",
