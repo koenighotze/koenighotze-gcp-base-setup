@@ -31,24 +31,26 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Authenticating
-        uses: google-github-actions/auth@v0.6.0
-        with:
-          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
-          # todo: replace with seed SA / (need to configure workload id pool)
-          service_account: ${{ secrets.SEED_SA_EMAIL_ADDRESS }}
-          token_format: "access_token"
-      - name: Setting up GCP environment
-        uses: google-github-actions/setup-gcloud@v0.5.1
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1.3.2
-      - name: Terraform Init
-        run: terraform init
+      # - name: Authenticating
+      #   uses: google-github-actions/auth@v0.6.0
+      #   with:
+      #     workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+      #     # todo: replace with seed SA / (need to configure workload id pool)
+      #     service_account: ${{ secrets.SEED_SA_EMAIL_ADDRESS }}
+      #     token_format: "access_token"
+      # - name: Setting up GCP environment
+      #   uses: google-github-actions/setup-gcloud@v0.5.1
+      # - name: Setup Terraform
+      #   uses: hashicorp/setup-terraform@v1.3.2
+      # - name: Terraform Init
+      #   run: terraform init
       - name: Run Checkov action
         id: checkov
         uses: bridgecrewio/checkov-action@v12.1343.0
         with:
           framework: terraform
+          # we are fine with Google's Keys
+          skip_check: CKV_GCP_84
           output_format: cli
           download_external_modules: true
 
