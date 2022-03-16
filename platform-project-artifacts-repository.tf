@@ -1,3 +1,4 @@
+#checkov:skip=CKV_GCP_84:We are fine with Google's keys
 resource "google_artifact_registry_repository" "docker" {
   provider = google-beta
 
