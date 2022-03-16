@@ -26,7 +26,7 @@ data "google_iam_policy" "deployer_policy" {
   }
 
   binding {
-    role = "roles/storage.legacyBucketReader)"
+    role = "roles/storage.legacyBucketReader"
 
     members = [
       "serviceAccount:${module.bodleian_service_deployer_service_account.service_account_email}"
