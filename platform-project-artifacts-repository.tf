@@ -1,0 +1,24 @@
+resource "google_artifact_registry_repository" "docker" {
+  provider = google-beta
+
+  location      = var.region
+  repository_id = "platform-registry-${random_integer.rand.result}"
+  description   = "Docker registry for KH projects"
+  format        = "DOCKER"
+}
+
+resource "google_artifact_registry_repository_iam_binding" "service_deployer_artifact_registry_iam_binding" {
+  provider = google-beta
+
+  for_each = toset([
+    "roles/artifactregistry.reader",
+    "roles/artifactregistry.writer"
+  ])
+
+  location   = google_artifact_registry_repository.docker.location
+  repository = google_artifact_registry_repository.docker.name
+  role       = each.value
+  members = [
+    "serviceAccount:${module.bodleian_service_deployer_service_account.service_account_email}"
+  ]
+}
