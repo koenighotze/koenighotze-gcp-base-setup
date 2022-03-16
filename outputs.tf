@@ -13,3 +13,4 @@ output "bodleian_service_deployer_service_account_email" {
 output "docker_registry" {
   value = "${google_artifact_registry_repository.docker.location}-docker.pkg.dev/${data.google_project.platform_project.project_id}"
 }
+
