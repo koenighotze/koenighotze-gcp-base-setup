@@ -18,4 +18,6 @@ resource "google_project_service" "platform_project_services" {
 
   project = data.google_project.platform_project.project_id
   service = each.value
+
+  disable_on_destroy = true
 }
