@@ -28,6 +28,16 @@ resource "google_project_service" "bodleian_project_services" {
   disable_on_destroy = true
 }
 
+resource "github_actions_secret" "bodleian_project_extra_secrets" {
+  for_each = {
+    "BODLEIAN_BACKEND_SERVICE_SERVICE_ACCOUNT_EMAIL_ADDRESS" = google_service_account.bodleian_backend_service_service_account.email
+  }
+
+  repository      = module.bodleian_project.full_name
+  secret_name     = each.key
+  plaintext_value = each.value
+}
+
 
 
 
