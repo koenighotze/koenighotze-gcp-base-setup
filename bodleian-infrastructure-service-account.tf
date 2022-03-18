@@ -2,9 +2,8 @@ locals {
   project_roles = [
     "roles/logging.logWriter",
     "roles/viewer",
-    "roles/iam.serviceAccountKeyAdmin",
-    "roles/iam.serviceAccountAdmin",
-    "roles/iam.securityAdmin"
+    # "roles/iam.serviceAccountAdmin",
+    # "roles/iam.securityAdmin"
   ]
 
   bodleian_project_id = data.google_project.bodleian_project.project_id
@@ -28,3 +27,5 @@ resource "google_project_iam_binding" "bodleian_infrastructure_iam_binding_proje
     "serviceAccount:${google_service_account.bodleian_infrastructure_service_account.email}"
   ]
 }
+
+
