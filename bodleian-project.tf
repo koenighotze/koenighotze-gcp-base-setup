@@ -13,7 +13,7 @@ module "bodleian_project" {
   docker_registry_token           = var.docker_registry_token
   container_registry              = "${google_artifact_registry_repository.docker.location}-docker.pkg.dev/${data.google_project.platform_project.project_id}/${google_artifact_registry_repository.docker.name}"
   service_account_email           = google_service_account.bodleian_infrastructure_service_account.email
-  # additional_project_apis         = ["run.googleapis.com"]
+  additional_project_apis         = ["run.googleapis.com"]
 }
 
 # resource "github_actions_secret" "bodleian_project_extra_secrets" {

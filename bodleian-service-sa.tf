@@ -2,9 +2,8 @@
 module "bodleian_service_deployer_service_account" {
   source = "github.com/koenighotze/gcp-tf-modules/deployer-service-account"
 
-  name        = "bodleian-service-tmp"
-  description = "This service account handles deployments"
-  project_id  = data.google_project.bodleian_project.project_id
+  name       = "bodleian-service-tmp"
+  project_id = data.google_project.bodleian_project.project_id
 }
 
 resource "google_service_account" "bodleian_backend_service_service_account" {
