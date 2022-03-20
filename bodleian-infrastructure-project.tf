@@ -16,18 +16,3 @@ module "bodleian_project" {
   additional_project_apis         = ["run.googleapis.com"]
 }
 
-# resource "github_actions_secret" "bodleian_project_extra_secrets" {
-#   for_each = {
-#     "BODLEIAN_BACKEND_SERVICE_SERVICE_ACCOUNT_EMAIL_ADDRESS" = google_service_account.bodleian_backend_service_service_account.email
-#   }
-
-#   repository      = module.bodleian_project.github_repository_full_name
-#   secret_name     = each.key
-#   plaintext_value = each.value
-# }
-
-
-
-
-
-

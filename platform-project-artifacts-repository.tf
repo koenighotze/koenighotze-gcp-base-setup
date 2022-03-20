@@ -22,6 +22,6 @@ resource "google_artifact_registry_repository_iam_binding" "service_deployer_art
   repository = google_artifact_registry_repository.docker.name
   role       = each.value
   members = [
-    "serviceAccount:${module.bodleian_service_deployer_service_account.service_account_email}"
+    "serviceAccount:${module.backend_deployer_sa.email}"
   ]
 }
