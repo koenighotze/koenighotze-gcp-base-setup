@@ -21,20 +21,20 @@ module "backend_repository" {
 
 # Allow repository to use deployer service account
 resource "google_service_account_iam_binding" "bodleian_service_deployer_workload_identity_sa_binding" {
-  depends_on = [
-    module.backend_deployer_sa,
-    module.backend_repository
-  ]
+  # depends_on = [
+  #   module.backend_deployer_sa,
+  #   module.backend_repository
+  # ]
   # this list must contain all repositories and their respective service account
-  for_each = {
-    (module.backend_deployer_sa.name) = module.backend_repository.full_name
-    # (data.google_service_account.sa.name)            = module.backend_repository.full_name
-  }
+  # for_each = {
+  #   (module.backend_deployer_sa.name) = module.backend_repository.full_name
+  #   # (data.google_service_account.sa.name)            = module.backend_repository.full_name
+  # }
 
-  service_account_id = each.key
+  service_account_id = module.backend_deployer_sa.name
   role               = "roles/iam.workloadIdentityUser"
 
   members = [
-    "principalSet://iam.googleapis.com/${var.workload_identity_pool_id}/attribute.repository/${each.value}",
+    "principalSet://iam.googleapis.com/${var.workload_identity_pool_id}/attribute.repository/${module.backend_repository.full_name}",
   ]
 }
