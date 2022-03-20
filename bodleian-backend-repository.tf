@@ -2,6 +2,33 @@ locals {
   repository_name = "bodleian-service-${random_integer.rand.result}"
 }
 
+# This SA is used by the bodleian-service to deploy resources
+module "backend_deployer_sa" {
+  source = "github.com/koenighotze/gcp-tf-modules/deployer-service-account"
+
+  name       = "backend"
+  project_id = data.google_project.bodleian_project.project_id
+}
+
+resource "google_service_account" "backend_service_sa" {
+  project     = data.google_project.bodleian_project.project_id
+  account_id  = "backend-service"
+  description = "Service account for running the backend part"
+}
+
+# This service must be able to run the backend as part of cloud run
+resource "google_project_iam_binding" "bodleian_backend_service_iam_binding" {
+  for_each = toset([
+    "roles/viewer",
+  ])
+  project = data.google_project.bodleian_project.project_id
+  role    = each.value
+
+  members = [
+    "serviceAccount:${google_service_account.backend_service_sa.email}"
+  ]
+}
+
 module "backend_repository" {
   source = "github.com/koenighotze/gcp-tf-modules/github-repository"
 
@@ -21,16 +48,6 @@ module "backend_repository" {
 
 # Allow repository to use deployer service account
 resource "google_service_account_iam_binding" "bodleian_service_deployer_workload_identity_sa_binding" {
-  # depends_on = [
-  #   module.backend_deployer_sa,
-  #   module.backend_repository
-  # ]
-  # this list must contain all repositories and their respective service account
-  # for_each = {
-  #   (module.backend_deployer_sa.name) = module.backend_repository.full_name
-  #   # (data.google_service_account.sa.name)            = module.backend_repository.full_name
-  # }
-
   service_account_id = module.backend_deployer_sa.name
   role               = "roles/iam.workloadIdentityUser"
 
