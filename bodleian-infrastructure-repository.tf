@@ -8,14 +8,14 @@ resource "google_service_account" "bodleian_infrastructure_service_account" {
 # This SA needs to be able to do some privileged work
 #tfsec:ignore:google-iam-no-privileged-service-accounts
 resource "google_project_iam_binding" "bodleian_infrastructure_iam_binding_project" {
-  for_each = toset(project_roles = [
+  for_each = toset([
     "roles/logging.logWriter",
     "roles/viewer"
     # "roles/iam.serviceAccountAdmin"
     # "roles/iam.securityAdmin"
   ])
-  project  = data.google_project.bodleian_project.project_id
-  role     = each.value
+  project = data.google_project.bodleian_project.project_id
+  role    = each.value
 
   members = [
     "serviceAccount:${google_service_account.bodleian_infrastructure_service_account.email}"
