@@ -19,6 +19,13 @@ jobs:
           output_format: cli
           download_external_modules: true
 
+  security-scan:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v3
+      - run: docker run -v ${PWD}:/src aquasec/tfsec:v1.8 /src
+
   lint:
     runs-on: ubuntu-20.04
 
@@ -47,6 +54,8 @@ jobs:
     needs:
       - lint
       - qa
+      - compliance-scan
+      - security-scan
 
     runs-on: ubuntu-20.04
 
@@ -56,11 +65,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: actions-ecosystem/action-add-labels@v1.1.0
-        with:
-          labels: |
-            linted
-            qaed
-            ready-for-review
-          github_token: ${{ secrets.GH_TOKEN_FOR_LABELING }}
-          number: ${{ github.event.number }}
+      # - uses: actions-ecosystem/action-add-labels@v1.1.0
+      #   with:
+      #     labels: |
+      #       linted
+      #       qaed
+      #       ready-for-review
+      #     github_token: ${{ secrets.GH_TOKEN_FOR_LABELING }}
+      #     number: ${{ github.event.number }}
