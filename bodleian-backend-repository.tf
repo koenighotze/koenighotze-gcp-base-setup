@@ -15,8 +15,7 @@ resource "google_service_account" "backend_service_sa" {
 # This service must be able to run the backend as part of cloud run
 resource "google_project_iam_binding" "bodleian_backend_service_iam_binding" {
   for_each = toset([
-    "roles/viewer",
-    "roles/run.developer"
+    "roles/viewer"
   ])
   project = data.google_project.bodleian_project.project_id
   role    = each.value
@@ -25,6 +24,16 @@ resource "google_project_iam_binding" "bodleian_backend_service_iam_binding" {
     "serviceAccount:${google_service_account.backend_service_sa.email}"
   ]
 }
+
+resource "google_service_account_iam_binding" "backend_service_sa_user_iam_binding" {
+  service_account_id = google_service_account.backend_service_sa.name
+  role               = "roles/iam.serviceAccountUser"
+
+  members = [
+    "serviceAccount:${google_service_account.bodleian_infrastructure_service_account.email}"
+  ]
+}
+
 
 module "backend_repository" {
   source = "github.com/koenighotze/gcp-tf-modules/github-repository"
