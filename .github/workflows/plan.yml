@@ -31,19 +31,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      # - name: Authenticating
-      #   uses: google-github-actions/auth@v0.6.0
-      #   with:
-      #     workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
-      #     # todo: replace with seed SA / (need to configure workload id pool)
-      #     service_account: ${{ secrets.SEED_SA_EMAIL_ADDRESS }}
-      #     token_format: "access_token"
-      # - name: Setting up GCP environment
-      #   uses: google-github-actions/setup-gcloud@v0.5.1
-      # - name: Setup Terraform
-      #   uses: hashicorp/setup-terraform@v1.3.2
-      # - name: Terraform Init
-      #   run: terraform init
       - name: Run Checkov action
         id: checkov
         uses: bridgecrewio/checkov-action@v12.1343.0
@@ -60,6 +47,20 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: docker run -v ${PWD}:/src aquasec/tfsec:v1.8 /src
+
+  lint:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: terraform-linters/setup-tflint@v1
+        name: Setting up TFLint
+        with:
+          tflint_version: v0.29.0
+      - name: Initializing TFLint
+        run: tflint --init
+      - name: Linting
+        run: tflint -f compact --disable-rule=terraform_module_pinned_source
 
   qa:
     runs-on: ubuntu-20.04
@@ -89,6 +90,7 @@ jobs:
 
     needs:
       - qa
+      - lint
       - security-scan
       - compliance-scan
 

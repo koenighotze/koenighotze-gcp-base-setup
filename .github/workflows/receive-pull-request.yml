@@ -4,45 +4,44 @@ on:
   pull_request:
 
 jobs:
+  compliance-scan:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Run Checkov action
+        id: checkov
+        uses: bridgecrewio/checkov-action@v12.1343.0
+        with:
+          framework: terraform
+          # we are fine with Google's Keys
+          skip_check: CKV_GCP_84,CKV_GIT_4
+          output_format: cli
+          download_external_modules: true
+
   lint:
     runs-on: ubuntu-20.04
 
     steps:
       - uses: actions/checkout@v3
-
       - uses: terraform-linters/setup-tflint@v1
         name: Setting up TFLint
         with:
           tflint_version: v0.29.0
-
       - name: Initializing TFLint
         run: tflint --init
-
       - name: Linting
-        run: tflint -f compact
+        run: tflint -f compact --disable-rule=terraform_module_pinned_source
 
   qa:
     runs-on: ubuntu-20.04
 
     steps:
       - uses: actions/checkout@v3
-
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1.3.2
-
       - name: Terraform Format
         run: terraform fmt -check -recursive
-
-      - uses: terraform-linters/setup-tflint@v1
-        name: Setting up TFLint
-        with:
-          tflint_version: v0.29.0
-
-      - name: Initializing TFLint
-        run: tflint --init
-
-      - name: Linting
-        run: tflint -f compact
 
   mark-pr:
     needs:
@@ -65,4 +64,3 @@ jobs:
             ready-for-review
           github_token: ${{ secrets.GH_TOKEN_FOR_LABELING }}
           number: ${{ github.event.number }}
-
