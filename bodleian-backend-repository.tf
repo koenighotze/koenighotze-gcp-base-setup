@@ -1,7 +1,3 @@
-locals {
-  repository_name = "bodleian-service-${random_integer.rand.result}"
-}
-
 # This SA is used by the bodleian-service to deploy resources
 module "backend_deployer_sa" {
   source = "github.com/koenighotze/gcp-tf-modules/deployer-service-account"
@@ -20,6 +16,7 @@ resource "google_service_account" "backend_service_sa" {
 resource "google_project_iam_binding" "bodleian_backend_service_iam_binding" {
   for_each = toset([
     "roles/viewer",
+    "roles/run.developer"
   ])
   project = data.google_project.bodleian_project.project_id
   role    = each.value
@@ -32,7 +29,7 @@ resource "google_project_iam_binding" "bodleian_backend_service_iam_binding" {
 module "backend_repository" {
   source = "github.com/koenighotze/gcp-tf-modules/github-repository"
 
-  target_repository_name          = local.repository_name
+  target_repository_name          = "bodleian-service-${random_integer.rand.result}"
   codacy_api_token                = var.codacy_api_token
   docker_registry_username        = "" # does not use docker hub
   docker_registry_token           = "" # does not use docker hub
