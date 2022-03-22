@@ -22,6 +22,7 @@ resource "google_artifact_registry_repository_iam_binding" "service_deployer_art
   repository = google_artifact_registry_repository.docker.name
   role       = each.value
   members = [
-    "serviceAccount:${module.backend_deployer_sa.email}"
+    "serviceAccount:${module.backend_deployer_sa.email}",
+    "serviceAccount:${google_service_account.backend_service_sa.email}"
   ]
 }
