@@ -4,6 +4,11 @@ module "backend_deployer_sa" {
 
   name       = "backend"
   project_id = data.google_project.bodleian_project.project_id
+
+  additional_deployer_sa_roles = [
+    "roles/iam.serviceAccountUser",
+    "roles/run.developer",
+  ]
 }
 
 resource "google_service_account" "backend_service_sa" {
