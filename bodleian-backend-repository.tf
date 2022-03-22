@@ -42,7 +42,6 @@ resource "google_service_account_iam_binding" "backend_service_sa_user_iam_bindi
   ]
 }
 
-
 module "backend_repository" {
   source = "github.com/koenighotze/gcp-tf-modules/github-repository"
 

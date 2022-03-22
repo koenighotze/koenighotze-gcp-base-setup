@@ -11,7 +11,7 @@ resource "google_project_iam_binding" "bodleian_infrastructure_iam_binding_proje
   for_each = toset([
     "roles/logging.logWriter",
     "roles/iam.serviceAccountViewer",
-    "roles/run.developer",
+    "roles/run.admin",
     "roles/viewer"
   ])
   project = data.google_project.bodleian_project.project_id

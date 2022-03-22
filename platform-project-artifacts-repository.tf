@@ -23,7 +23,6 @@ resource "google_artifact_registry_repository_iam_binding" "service_deployer_art
   role       = each.value
   members = [
     "serviceAccount:${module.backend_deployer_sa.email}",
-    "serviceAccount:${google_service_account.backend_service_sa.email}",
-    "serviceAccount:26455546757-compute@developer.gserviceaccount.com"
+    "serviceAccount:${google_service_account.backend_service_sa.email}"
   ]
 }
