@@ -3,7 +3,7 @@ module "bodleian_project" {
   source = "github.com/koenighotze/gcp-tf-modules/infrastructure-project"
 
   project_id                      = data.google_project.bodleian_project.project_id
-  project_name                    = "bodleian"
+  project_name                    = "bodleian-${random_integer.rand.result}"
   github_admin_token              = var.github_admin_token
   github_api_label_token          = var.github_api_label_token
   workload_identity_provider_name = var.workload_identity_provider_name
