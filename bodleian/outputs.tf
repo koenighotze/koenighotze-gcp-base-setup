@@ -1,10 +1,10 @@
-# output "overall_budget_id" {
-#   value = google_billing_budget.overall_budget.id
-# }
+output "infrastructure_service_account_email" {
+  value = google_service_account.bodleian_infrastructure_service_account.email
+}
 
-# output "bodleian_infrastructure_service_account_email" {
-#   value = google_service_account.bodleian_infrastructure_service_account.email
-# }
+output "infrastructure_repository_full_name" {
+  value = module.bodleian_project.github_repository_full_name
+}
 
 # output "bodleian_backend_deployer_service_account_email" {
 #   value = module.backend_deployer_sa.email
@@ -22,6 +22,4 @@
 #   value = module.backend_repository.full_name
 # }
 
-# output "bodleian_infrastructure_repository_full_name" {
-#   value = module.bodleian_project.github_repository_full_name
-# }
+

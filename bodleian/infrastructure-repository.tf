@@ -33,22 +33,20 @@ module "bodleian_project" {
   workload_identity_provider_name = var.workload_identity_provider_name
   workload_identity_pool_id       = var.workload_identity_pool_id
   codacy_api_token                = var.codacy_api_token
-  docker_registry_username        = var.docker_registry_username
-  docker_registry_token           = var.docker_registry_token
-  container_registry              = "${google_artifact_registry_repository.docker.location}-docker.pkg.dev/${data.google_project.platform_project.project_id}/${google_artifact_registry_repository.docker.name}"
+  container_registry              = var.container_registry
   service_account_email           = google_service_account.bodleian_infrastructure_service_account.email
   additional_project_apis         = ["run.googleapis.com"]
 }
 
-resource "github_actions_secret" "backend_runtime_sa_email_secret" {
-  repository      = module.bodleian_project.github_repository_id
-  secret_name     = "BACKEND_RUNTIME_SA_EMAIL"
-  plaintext_value = google_service_account.backend_service_sa.email
-}
+# resource "github_actions_secret" "backend_runtime_sa_email_secret" {
+#   repository      = module.bodleian_project.github_repository_id
+#   secret_name     = "BACKEND_RUNTIME_SA_EMAIL"
+#   plaintext_value = google_service_account.backend_service_sa.email
+# }
 
-resource "github_actions_secret" "backend_repository_full_name_secret" {
-  repository      = module.bodleian_project.github_repository_id
-  secret_name     = "BACKEND_REPOSITORY_FULL_NAME"
-  plaintext_value = module.backend_repository.full_name
-}
+# resource "github_actions_secret" "backend_repository_full_name_secret" {
+#   repository      = module.bodleian_project.github_repository_id
+#   secret_name     = "BACKEND_REPOSITORY_FULL_NAME"
+#   plaintext_value = module.backend_repository.full_name
+# }
 

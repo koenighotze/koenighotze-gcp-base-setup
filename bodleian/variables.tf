@@ -1,22 +1,22 @@
-variable "billing_account_id" {
-  type        = string
-  sensitive   = true
-  description = "The id of the billing account"
-}
+# variable "billing_account_id" {
+#   type        = string
+#   sensitive   = true
+#   description = "The id of the billing account"
+# }
 
-variable "seed_sa_email_address" {
-  type        = string
-  sensitive   = true
-  description = "Email address of the service account"
-}
+# variable "seed_sa_email_address" {
+#   type        = string
+#   sensitive   = true
+#   description = "Email address of the service account"
+# }
 
-variable "region" {
-  default = "europe-west3"
-}
+# variable "region" {
+#   default = "europe-west3"
+# }
 
-variable "environment" {
-  default = "dev"
-}
+# variable "environment" {
+#   default = "dev"
+# }
 
 variable "github_admin_token" {
   type        = string
@@ -51,14 +51,8 @@ variable "codacy_api_token" {
   description = "The API token for uploading coverage data"
 }
 
-variable "docker_registry_username" {
+variable "container_registry" {
   type        = string
   sensitive   = true
-  description = "The username for uploading images to docker hub"
-}
-
-variable "docker_registry_token" {
-  type        = string
-  sensitive   = true
-  description = "The API token for uploading images to docker hub"
+  description = "The container registry path"
 }
