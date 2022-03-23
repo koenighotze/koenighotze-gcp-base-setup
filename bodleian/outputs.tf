@@ -1,3 +1,7 @@
+output "overall_budget_id" {
+  value = google_billing_budget.overall_budget.id
+}
+
 output "bodleian_infrastructure_service_account_email" {
   value = google_service_account.bodleian_infrastructure_service_account.email
 }

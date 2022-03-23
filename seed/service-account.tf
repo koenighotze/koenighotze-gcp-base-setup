@@ -8,6 +8,6 @@ resource "google_project_iam_binding" "seed_platform_iam_binding_project" {
   role    = each.value
 
   members = [
-    "serviceAccount:${data.google_service_account.seed_sa.email}"
+    "serviceAccount:${var.seed_sa_email}"
   ]
 }
