@@ -21,3 +21,7 @@
 # output "bodleian_infrastructure_repository_full_name" {
 #   value = module.bodleian_project.github_repository_full_name
 # }
+
+output "container_registry" {
+  value = module.platform.container_registry
+}
