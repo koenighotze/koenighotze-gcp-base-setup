@@ -2,8 +2,9 @@
 
 set -euo
 
-SEED_SA="$1"
-SEED_PROJECT="${2:-koenighotze-seed}"
+POSTFIX=${1?Postfix missing}
+SEED_SA="koenighotze-seed-sa@koenighotze-seed-${POSTFIX}.iam.gserviceaccount.com"
+SEED_PROJECT="koenighotze-seed-$POSTFIX"
 REPO=koenighotze/koenighotze-gcp-base-setup
 WORKLOAD_IDENTITY_POOL=github-cicd-pool
 PROVIDER_ID=github-provider

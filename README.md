@@ -29,3 +29,24 @@ graph LR;
     GitHubActions-- terraforms -->Billing;
     GitHubActions-- terraforms -->ProjectSAs & Projects & ProjectStateBuckets & ProjectInfraRepository;
 ```
+
+## Setup instructions
+
+Setup billing account and export its id to $BILLING_ACCOUNT. Generate a unique id and export it as $POSTFIX. E.g.,:
+
+```bash
+export BILLING_ACCOUNT=134
+export POSTFIX=414xb1
+
+./scripts/create-seed-project.sh $BILLING_ACCOUNT $POSTFIX
+./scripts/create-seed-sa.sh $POSTFIX
+./scripts/create-projects.sh $BILLING_ACCOUNT $POSTFIX
+```
+
+Set GH secrets on this repo manually:
+
+- ADMIN_GITHUB_TOKEN
+- GH_TOKEN_FOR_LABELING
+- CODACY_API_TOKEN
+- DOCKER_REGISTRY_TOKEN
+- DOCKER_REGISTRY_USERNAME

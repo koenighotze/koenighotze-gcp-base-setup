@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-
-SEED_PROJECT_ID=koenighotze-seed
+POSTFIX=${1?Postfix missing}
+SEED_PROJECT_ID="koenighotze-seed-$POSTFIX"
 SA_ID=koenighotze-seed-sa
 SEED_REPOSITORY=koenighotze/koenighotze-gcp-base-setup
 
