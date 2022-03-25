@@ -1,10 +1,10 @@
 locals {
   artifact_reader_sas = [
-    module.bodleian.backend_deployer_service_account_email
+    # module.bodleian.backend_deployer_service_account_email
   ]
 
   artifact_writer_sas = [
-    module.bodleian.backend_deployer_service_account_email
+    # module.bodleian.backend_deployer_service_account_email
   ]
 }
 
