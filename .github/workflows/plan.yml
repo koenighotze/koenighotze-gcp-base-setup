@@ -20,7 +20,7 @@ env:
   TF_IN_AUTOMATION: "true"
   TF_INPUT: "false"
   GITHUB_TOKEN: "${{ secrets.ADMIN_GITHUB_TOKEN }}"
-  CLOUDSDK_CORE_PROJECT: ${{ secrets.BASELINE_PROJECT_ID }}
+  CLOUDSDK_CORE_PROJECT: ${{ secrets.GCP_PROJECT_ID }}
 
 permissions:
   id-token: write
