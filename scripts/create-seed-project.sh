@@ -22,6 +22,6 @@ gsutil mb -l europe-west3 -p "$SEED_PROJECT" "gs://${SEED_PROJECT}"
 gh secret set GCP_PROJECT_ID -R "${SEED_REPOSITORY}" -b "${SEED_PROJECT}"
 gh secret set BILLING_ACCOUNT_ID -R "${SEED_REPOSITORY}" -b "${BILLING_ACCOUNT}"
 gh secret set GCP_PROJECT_POSTFIX -R "${SEED_REPOSITORY}" -b "${POSTFIX}"
-gh secret set TERRAFORM_STATE_BUCKET -R "${SEED_REPOSITORY}" -b "gs://${SEED_PROJECT}"
+gh secret set TERRAFORM_STATE_BUCKET -R "${SEED_REPOSITORY}" -b "$SEED_PROJECT"
 
 echo "Generated postfix: $POSTFIX"
