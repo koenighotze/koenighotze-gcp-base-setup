@@ -1,6 +1,6 @@
-# output "infrastructure_service_account_email" {
-#   value = google_service_account.bodleian_infrastructure_service_account.email
-# }
+output "infrastructure_service_account_email" {
+  value = google_service_account.bodleian_infrastructure_service_account.email
+}
 
 # # output "infrastructure_repository_full_name" {
 # #   value = module.bodleian_project.github_repository_full_name
