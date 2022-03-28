@@ -5,17 +5,37 @@ resource "google_service_account" "bodleian_infrastructure_service_account" {
   description  = "Service account for infrastructure activities on this project"
 }
 
-# This SA needs to be able to do some privileged work
+resource "google_project_iam_binding" "bodleian_infrastructure_iam_binding_project" {
+  project = data.google_project.project.project_id
+  role    = "roles/logging.logWriter"
+
+  members = [
+    "serviceAccount:${google_service_account.bodleian_infrastructure_service_account.email}"
+  ]
+}
+
+resource "google_project_iam_binding" "bodleian_infrastructure_iam_binding_project" {
+  project = data.google_project.project.project_id
+  role    = "roles/iam.serviceAccountViewer"
+
+  members = [
+    "serviceAccount:${google_service_account.bodleian_infrastructure_service_account.email}"
+  ]
+}
+
 #tfsec:ignore:google-iam-no-privileged-service-accounts
 resource "google_project_iam_binding" "bodleian_infrastructure_iam_binding_project" {
-  for_each = toset([
-    "roles/logging.logWriter",
-    "roles/iam.serviceAccountViewer",
-    "roles/run.admin",
-    "roles/viewer"
-  ])
   project = data.google_project.project.project_id
-  role    = each.value
+  role    = "roles/run.admin"
+
+  members = [
+    "serviceAccount:${google_service_account.bodleian_infrastructure_service_account.email}"
+  ]
+}
+
+resource "google_project_iam_binding" "bodleian_infrastructure_iam_binding_project" {
+  project = data.google_project.project.project_id
+  role    = "roles/viewer"
 
   members = [
     "serviceAccount:${google_service_account.bodleian_infrastructure_service_account.email}"
