@@ -14,15 +14,8 @@ module "bodleian_project" {
   additional_project_apis         = ["run.googleapis.com"]
 }
 
-# resource "github_actions_secret" "backend_runtime_sa_email_secret" {
-#   repository      = module.bodleian_project.github_repository_id
-#   secret_name     = "BACKEND_RUNTIME_SA_EMAIL"
-#   plaintext_value = google_service_account.backend_service_sa.email
-# }
-
-# resource "github_actions_secret" "backend_repository_full_name_secret" {
-#   repository      = module.bodleian_project.github_repository_id
-#   secret_name     = "BACKEND_REPOSITORY_FULL_NAME"
-#   plaintext_value = module.backend_repository.full_name
-# }
-
+resource "github_actions_secret" "backend_runtime_sa_email_secret" {
+  repository      = module.bodleian_project.github_repository_id
+  secret_name     = "BACKEND_RUNTIME_SA_EMAIL"
+  plaintext_value = google_service_account.backend_service_sa.email
+}
