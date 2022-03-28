@@ -2,7 +2,7 @@
 module "backend_deployer_sa" {
   source = "github.com/koenighotze/gcp-tf-modules/deployer-service-account"
 
-  name       = "backend"
+  name       = "bodleian-backend-service"
   project_id = data.google_project.project.project_id
 
   additional_deployer_sa_roles = [

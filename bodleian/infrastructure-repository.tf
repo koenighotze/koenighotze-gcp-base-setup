@@ -13,9 +13,3 @@ module "bodleian_project" {
   service_account_email           = google_service_account.bodleian_infrastructure_service_account.email
   additional_project_apis         = ["run.googleapis.com"]
 }
-
-resource "github_actions_secret" "backend_runtime_sa_email_secret" {
-  repository      = module.bodleian_project.github_repository_id
-  secret_name     = "BACKEND_RUNTIME_SA_EMAIL"
-  plaintext_value = google_service_account.backend_service_sa.email
-}
