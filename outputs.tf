@@ -6,10 +6,6 @@
 #   value = module.backend_deployer_sa.email
 # }
 
-# output "container_registry" {
-#   value = "${google_artifact_registry_repository.docker.location}-docker.pkg.dev/${data.google_project.platform_project.project_id}/${google_artifact_registry_repository.docker.name}"
-# }
-
 # output "bodleian_backend_service_service_account_email" {
 #   value = google_service_account.backend_service_sa.email
 # }
@@ -24,4 +20,16 @@
 
 output "container_registry" {
   value = module.platform.container_registry
+}
+
+output "bodleian_state_bucket_url" {
+  value = module.bodleian.state_bucket_url
+}
+
+output "bodleian_infrastructure_sa_email" {
+  value = module.bodleian.infrastructure_sa_email
+}
+
+output "bodleian_backend_deployer_sa_email" {
+  value = module.bodleian.backend_deployer_sa_email
 }
