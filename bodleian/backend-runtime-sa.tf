@@ -1,6 +1,6 @@
 resource "google_service_account" "backend_service_sa" {
   project     = data.google_project.project.project_id
-  account_id  = "bodleian-backend-service-runtime"
+  account_id  = "bodleian-backend"
   description = "Service account for running the backend part"
 }
 
