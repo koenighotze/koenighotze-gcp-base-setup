@@ -5,46 +5,18 @@ resource "google_service_account" "bodleian_infrastructure_service_account" {
   description  = "Service account for infrastructure activities on this project"
 }
 
-resource "google_project_iam_binding" "bodleian_infrastructure_iam_binding_project_logwriter" {
-  project = data.google_project.project.project_id
-  role    = "roles/logging.logWriter"
-
-  members = [
-    "serviceAccount:${google_service_account.bodleian_infrastructure_service_account.email}"
-  ]
-}
-
-resource "google_project_iam_binding" "bodleian_infrastructure_iam_binding_project_serviceaccountviewer" {
-  project = data.google_project.project.project_id
-  role    = "roles/iam.serviceAccountViewer"
-
-  members = [
-    "serviceAccount:${google_service_account.bodleian_infrastructure_service_account.email}"
-  ]
-}
-
 #tfsec:ignore:google-iam-no-privileged-service-accounts
-resource "google_project_iam_binding" "bodleian_infrastructure_iam_binding_project_runadmin" {
+resource "google_project_iam_binding" "bodleian_infrastructure_iam_binding_project" {
+  for_each = toset([
+    "roles/logging.logWriter",
+    "roles/iam.serviceAccountViewer",
+    "roles/run.admin",
+    "roles/viewer",
+    "roles/iam.serviceAccountUser"
+  ])
+
   project = data.google_project.project.project_id
-  role    = "roles/run.admin"
-
-  members = [
-    "serviceAccount:${google_service_account.bodleian_infrastructure_service_account.email}"
-  ]
-}
-
-resource "google_project_iam_binding" "bodleian_infrastructure_iam_binding_project_viewer" {
-  project = data.google_project.project.project_id
-  role    = "roles/viewer"
-
-  members = [
-    "serviceAccount:${google_service_account.bodleian_infrastructure_service_account.email}"
-  ]
-}
-
-resource "google_service_account_iam_binding" "backend_service_sa_user_iam_binding_serviceaccountuser" {
-  service_account_id = google_service_account.backend_service_sa.name
-  role               = "roles/iam.serviceAccountUser"
+  role    = each.key
 
   members = [
     "serviceAccount:${google_service_account.bodleian_infrastructure_service_account.email}"
