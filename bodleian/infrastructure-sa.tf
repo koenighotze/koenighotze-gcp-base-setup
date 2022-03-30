@@ -5,7 +5,7 @@ resource "google_service_account" "bodleian_infrastructure_service_account" {
   description  = "Service account for infrastructure activities on this project"
 }
 
-resource "google_project_iam_binding" "bodleian_infrastructure_iam_binding_project" {
+resource "google_project_iam_binding" "bodleian_infrastructure_iam_binding_project_logwriter" {
   project = data.google_project.project.project_id
   role    = "roles/logging.logWriter"
 
@@ -14,7 +14,7 @@ resource "google_project_iam_binding" "bodleian_infrastructure_iam_binding_proje
   ]
 }
 
-resource "google_project_iam_binding" "bodleian_infrastructure_iam_binding_project" {
+resource "google_project_iam_binding" "bodleian_infrastructure_iam_binding_project_serviceaccountviewer" {
   project = data.google_project.project.project_id
   role    = "roles/iam.serviceAccountViewer"
 
@@ -24,7 +24,7 @@ resource "google_project_iam_binding" "bodleian_infrastructure_iam_binding_proje
 }
 
 #tfsec:ignore:google-iam-no-privileged-service-accounts
-resource "google_project_iam_binding" "bodleian_infrastructure_iam_binding_project" {
+resource "google_project_iam_binding" "bodleian_infrastructure_iam_binding_project_runadmin" {
   project = data.google_project.project.project_id
   role    = "roles/run.admin"
 
@@ -33,7 +33,7 @@ resource "google_project_iam_binding" "bodleian_infrastructure_iam_binding_proje
   ]
 }
 
-resource "google_project_iam_binding" "bodleian_infrastructure_iam_binding_project" {
+resource "google_project_iam_binding" "bodleian_infrastructure_iam_binding_project_viewer" {
   project = data.google_project.project.project_id
   role    = "roles/viewer"
 
@@ -42,7 +42,7 @@ resource "google_project_iam_binding" "bodleian_infrastructure_iam_binding_proje
   ]
 }
 
-resource "google_service_account_iam_binding" "backend_service_sa_user_iam_binding" {
+resource "google_service_account_iam_binding" "backend_service_sa_user_iam_binding_serviceaccountuser" {
   service_account_id = google_service_account.backend_service_sa.name
   role               = "roles/iam.serviceAccountUser"
 
