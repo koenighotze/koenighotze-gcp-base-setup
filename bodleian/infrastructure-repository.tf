@@ -11,5 +11,4 @@ module "bodleian_project" {
   codacy_api_token                = var.codacy_api_token
   container_registry              = var.container_registry
   service_account_email           = google_service_account.bodleian_infrastructure_service_account.email
-  additional_project_apis         = ["run.googleapis.com"]
 }
