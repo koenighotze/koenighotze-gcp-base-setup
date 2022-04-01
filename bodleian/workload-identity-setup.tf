@@ -1,6 +1,6 @@
 locals {
   repositories = [
-    module.bodleian_project.github_repository_full_name,
+    "koenighotze/infrastructure-${data.google_project.project.project_id}",
     "koenighotze/bodleian-service"
   ]
 }
