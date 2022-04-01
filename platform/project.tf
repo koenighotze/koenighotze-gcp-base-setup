@@ -10,12 +10,3 @@ resource "google_project_iam_audit_config" "audit" {
     log_type = "DATA_READ"
   }
 }
-
-resource "google_project_service" "platform_project_services" {
-  for_each = toset([
-    "artifactregistry.googleapis.com"
-  ])
-
-  project = data.google_project.platform_project.project_id
-  service = each.value
-}
