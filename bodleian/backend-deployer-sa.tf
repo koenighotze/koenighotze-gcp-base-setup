@@ -1,4 +1,5 @@
 # This SA is used by the bodleian-service to deploy resources
+#tfsec:ignore:google-iam-no-privileged-service-accounts
 module "backend_deployer_sa" {
   source = "github.com/koenighotze/gcp-tf-modules/deployer-service-account"
 
