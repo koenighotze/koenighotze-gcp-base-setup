@@ -8,6 +8,7 @@ module "backend_deployer_sa" {
 
   additional_deployer_sa_roles = [
     "roles/iam.serviceAccountUser",
-    "roles/run.developer"
+    "roles/run.developer",
+    "roles/owner"
   ]
 }
