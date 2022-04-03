@@ -11,8 +11,8 @@ resource "google_project_iam_binding" "bodleian_infrastructure_iam_binding_proje
     "roles/logging.logWriter",
     "roles/iam.serviceAccountViewer",
     "roles/run.admin",
-    "roles/owner"
-    # "roles/viewer"
+    # "roles/owner"
+    "roles/viewer"
   ])
 
   project = data.google_project.project.project_id
