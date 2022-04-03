@@ -15,8 +15,9 @@ resource "google_artifact_registry_repository_iam_binding" "service_deployer_art
 
   location   = module.platform.location
   repository = module.platform.repository
-  role       = "roles/artifactregistry.admin"
-  members    = [for sa in local.artifact_reader_sas : "serviceAccount:${sa}"]
+  # role       = "roles/artifactregistry.admin"
+  role    = "roles/artifactregistry.reader"
+  members = [for sa in local.artifact_reader_sas : "serviceAccount:${sa}"]
 }
 
 resource "google_artifact_registry_repository_iam_binding" "service_deployer_artifact_registry_writers" {
@@ -25,6 +26,7 @@ resource "google_artifact_registry_repository_iam_binding" "service_deployer_art
 
   location   = module.platform.location
   repository = module.platform.repository
-  role       = "roles/artifactregistry.admin"
-  members    = [for sa in local.artifact_writer_sas : "serviceAccount:${sa}"]
+  # role       = "roles/artifactregistry.admin"
+  role    = "roles/artifactregistry.writer"
+  members = [for sa in local.artifact_writer_sas : "serviceAccount:${sa}"]
 }
