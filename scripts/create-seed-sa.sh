@@ -3,15 +3,15 @@
 POSTFIX=${1?Postfix missing}
 SEED_PROJECT="koenighotze-seed-$POSTFIX"
 SA_ID=koenighotze-seed-sa
-BILLING_ACCOUNT=${1?Billing account missing}
+BILLING_ACCOUNT=${2?Billing account missing}
 SA_EMAIL="${SA_ID}@${SEED_PROJECT}.iam.gserviceaccount.com"
 SEED_REPOSITORY=koenighotze/koenighotze-gcp-base-setup
 
 gcloud config set project "$SEED_PROJECT"
 
 # this needs to be refactored once I have an organization
-# gcloud iam service-accounts create "$SA_ID" \
-#     --display-name "Seed account for Koenighotze"
+gcloud iam service-accounts create "$SA_ID" \
+    --display-name "Seed account for Koenighotze"
 
 gcloud projects add-iam-policy-binding \
     "$SEED_PROJECT" \
