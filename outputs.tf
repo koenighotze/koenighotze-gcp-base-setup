@@ -1,6 +1,6 @@
-output "container_registry" {
-  value = module.platform.container_registry
-}
+# output "container_registry" {
+#   value = module.platform.container_registry
+# }
 
 # output "bodleian_state_bucket_url" {
 #   value = module.bodleian.state_bucket_url
