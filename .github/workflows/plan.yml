@@ -70,7 +70,7 @@ jobs:
       - name: Authenticating
         uses: google-github-actions/auth@v0.6.0
         with:
-          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+          workload_identity_provider: "projects/642340482178/locations/global/workloadIdentityPools/github-cicd-pool/providers/github-provider" #${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
           service_account: koenighotze-seed-sa@koenighotze-seed-398addce.iam.gserviceaccount.com # ${{ secrets.SEED_SA_EMAIL_ADDRESS }}
           token_format: "access_token"
       - name: Setting up GCP environment
