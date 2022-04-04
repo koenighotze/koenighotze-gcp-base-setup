@@ -74,6 +74,7 @@ jobs:
           service_account: koenighotze-seed-sa@koenighotze-seed-398addce.iam.gserviceaccount.com # ${{ secrets.SEED_SA_EMAIL_ADDRESS }}
       - name: Setting up GCP environment
         uses: google-github-actions/setup-gcloud@v0.6.0
+      - run: gsutil ls gs://koenighotze-seed-398addce/terraform/baseline/state
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1.3.2
       - name: Terraform Init
