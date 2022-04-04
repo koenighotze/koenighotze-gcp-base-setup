@@ -48,6 +48,7 @@ jobs:
           service_account: ${{ secrets.SEED_SA_EMAIL_ADDRESS }}
       - name: Setting up GCP environment
         uses: google-github-actions/setup-gcloud@v0.6.0
+      - run: gcloud auth print-identity-token
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
       - name: Init
