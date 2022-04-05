@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -euo
-
 POSTFIX=${1?Postfix missing}
 SEED_SA="koenighotze-seed-sa@koenighotze-seed-${POSTFIX}.iam.gserviceaccount.com"
 SEED_PROJECT="koenighotze-seed-$POSTFIX"

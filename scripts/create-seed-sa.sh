@@ -28,12 +28,17 @@ gcloud projects add-iam-policy-binding \
     --member="serviceAccount:$SA_EMAIL" \
     --role="roles/storage.admin"
 
+gcloud projects add-iam-policy-binding \
+    "$SEED_PROJECT" \
+    --member="serviceAccount:$SA_EMAIL" \
+    --role="roles/storage.objectAdmin"
+
 gcloud beta billing accounts add-iam-policy-binding "${BILLING_ACCOUNT}"  \
     --member="serviceAccount:$SA_EMAIL" \
     --role="roles/billing.admin"
 
 # we don't use keys anymore, but use workload identity
-# gh secret set GCP_SEED_SA_KEY -R "${SEED_REPOSITORY}" < key-file.json
+gh secret set GCP_SEED_SA_KEY -R "${SEED_REPOSITORY}" < key-file.json
 gh secret set SEED_SA_EMAIL_ADDRESS -R "${SEED_REPOSITORY}" -b "${SA_EMAIL}"
 
 echo "Seed SA: $SA_EMAIL"
