@@ -11,7 +11,7 @@ env:
   TF_VAR_seed_sa_email: koenighotze-seed-sa@koenighotze-seed-398addce.iam.gserviceaccount.com # ${{ secrets.SEED_SA_EMAIL_ADDRESS }}
   TF_VAR_github_admin_token: ${{ secrets.ADMIN_GITHUB_TOKEN }}
   TF_VAR_github_api_label_token: ${{ secrets.GH_TOKEN_FOR_LABELING }}
-  TF_VAR_project_postfix: 398addce # ${{ secrets.GCP_PROJECT_POSTFIX }}
+  TF_VAR_project_postfix: ${{ secrets.GCP_PROJECT_POSTFIX }}
   TF_VAR_workload_identity_provider_name: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
   TF_VAR_workload_identity_pool_id: ${{ secrets.WORKLOAD_IDENTITY_POOL_ID }}
   TF_VAR_codacy_api_token: ${{ secrets.CODACY_API_TOKEN }}
@@ -70,8 +70,8 @@ jobs:
       - name: Authenticating
         uses: google-github-actions/auth@v0.6.0
         with:
-          workload_identity_provider: "projects/642340482178/locations/global/workloadIdentityPools/github-cicd-pool/providers/github-provider" #${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
-          service_account: koenighotze-seed-sa@koenighotze-seed-398addce.iam.gserviceaccount.com # ${{ secrets.SEED_SA_EMAIL_ADDRESS }}
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.SEED_SA_EMAIL_ADDRESS }}
           token_format: "access_token"
       - name: Setting up GCP environment
         uses: google-github-actions/setup-gcloud@v0.6.0
@@ -79,7 +79,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1.3.2
       - name: Terraform Init
-        run: terraform init -backend-config="bucket=koenighotze-seed-398addce" #${{ secrets.TERRAFORM_STATE_BUCKET }}"
+        run: terraform init -backend-config="bucket=${{ secrets.TERRAFORM_STATE_BUCKET }}"
       - name: Terraform Format
         run: terraform fmt -check -recursive
       - name: Terraform Validate
