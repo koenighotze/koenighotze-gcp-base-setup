@@ -18,10 +18,7 @@ resource "google_project_iam_member" "cloud_run_deployer_binding" {
 
   project = data.google_project.project.project_id
   role    = each.key
-
-  members = [
-    "serviceAccount:${module.backend_deployer_sa.email}"
-  ]
+  member  = "serviceAccount:${module.backend_deployer_sa.email}"
 }
 
 

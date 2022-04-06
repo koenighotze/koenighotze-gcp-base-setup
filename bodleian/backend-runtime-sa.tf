@@ -15,8 +15,5 @@ resource "google_project_iam_member" "bodleian_backend_service_iam_binding" {
   ])
   project = data.google_project.project.project_id
   role    = each.value
-
-  members = [
-    "serviceAccount:${google_service_account.backend_service_sa.email}"
-  ]
+  member  = "serviceAccount:${google_service_account.backend_service_sa.email}"
 }
