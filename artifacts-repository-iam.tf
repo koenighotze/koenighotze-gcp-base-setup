@@ -17,7 +17,7 @@ resource "google_artifact_registry_repository_iam_member" "artifact_registry_rea
   location   = module.platform.location
   repository = module.platform.repository
   role       = "roles/artifactregistry.reader"
-  member     = "user:${each.key}"
+  member     = "serviceAccount:${each.key}"
 }
 
 resource "google_artifact_registry_repository_iam_member" "artifact_registry_writers" {
@@ -28,7 +28,7 @@ resource "google_artifact_registry_repository_iam_member" "artifact_registry_wri
   location   = module.platform.location
   repository = module.platform.repository
   role       = "roles/artifactregistry.writer"
-  member     = "user:${each.key}"
+  member     = "serviceAccount:${each.key}"
 }
 
 # resource "google_artifact_registry_repository_iam_binding" "service_deployer_artifact_registry_readers" {
