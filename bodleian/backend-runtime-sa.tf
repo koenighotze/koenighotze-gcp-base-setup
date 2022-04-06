@@ -6,7 +6,7 @@ resource "google_service_account" "backend_service_sa" {
 
 # This service must be able to run the backend as part of cloud run
 #tfsec:ignore:google-iam-no-privileged-service-accounts
-resource "google_project_iam_binding" "bodleian_backend_service_iam_binding" {
+resource "google_project_iam_member" "bodleian_backend_service_iam_binding" {
   for_each = toset([
     "roles/logging.logWriter",
     "roles/iam.serviceAccountViewer",

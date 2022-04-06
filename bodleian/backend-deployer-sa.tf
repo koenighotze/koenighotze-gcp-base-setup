@@ -6,10 +6,21 @@ module "backend_deployer_sa" {
   name        = "bodleian-backend"
   project_id  = data.google_project.project.project_id
   description = "Service account for CICD for the backend part"
+}
 
-  additional_deployer_sa_roles = [
+resource "google_project_iam_member" "cloud_run_deployer_binding" {
+  for_each = toset([
     "roles/iam.serviceAccountUser",
     "roles/run.developer",
     "roles/viewer"
+  ])
+
+  project = data.google_project.project.project_id
+  role    = each.key
+
+  members = [
+    "serviceAccount:${module.backend_deployer_sa.email}"
   ]
 }
+
+
