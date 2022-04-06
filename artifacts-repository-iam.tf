@@ -9,7 +9,7 @@ locals {
   ]
 }
 
-resource "google_artifact_registry_repository_iam_member" "member" {
+resource "google_artifact_registry_repository_iam_member" "artifact_registry_readers" {
   for_each = to_set(local.artifact_reader_sas)
 
   provider   = google-beta
@@ -20,7 +20,7 @@ resource "google_artifact_registry_repository_iam_member" "member" {
   member     = "user:${each.key}"
 }
 
-resource "google_artifact_registry_repository_iam_member" "member" {
+resource "google_artifact_registry_repository_iam_member" "artifact_registry_writers" {
   for_each = to_set(local.artifact_writer_sas)
 
   provider   = google-beta
