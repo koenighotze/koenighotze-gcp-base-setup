@@ -8,16 +8,16 @@ module "frontend_deployer_sa" {
   description = "Service account for CICD for the frontend part"
 }
 
-#tfsec:ignore:google-iam-no-privileged-service-accounts tfsec:ignore:google-iam-no-project-level-service-account-impersonation
-resource "google_project_iam_member" "frontend_deployer_sa_binding" {
-  for_each = toset([
-    "roles/iam.serviceAccountUser",
-    "roles/viewer"
-  ])
+# #tfsec:ignore:google-iam-no-privileged-service-accounts tfsec:ignore:google-iam-no-project-level-service-account-impersonation
+# resource "google_project_iam_member" "frontend_deployer_sa_binding" {
+#   for_each = toset([
+#     "roles/iam.serviceAccountUser",
+#     "roles/viewer"
+#   ])
 
-  project = data.google_project.project.project_id
-  role    = each.key
-  member  = "serviceAccount:${module.frontend_deployer_sa.email}"
-}
+#   project = data.google_project.project.project_id
+#   role    = each.key
+#   member  = "serviceAccount:${module.frontend_deployer_sa.email}"
+# }
 
 
