@@ -9,7 +9,7 @@ module "backend_deployer_sa" {
 }
 
 #tfsec:ignore:google-iam-no-privileged-service-accounts tfsec:ignore:google-iam-no-project-level-service-account-impersonation
-resource "google_project_iam_member" "backend_deployer_sa_binding" {
+resource "google_project_iam_member" "cloud_run_deployer_binding" {
   for_each = toset([
     "roles/iam.serviceAccountUser",
     "roles/run.developer",
