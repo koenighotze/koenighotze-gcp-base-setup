@@ -35,3 +35,4 @@ terraform.tfvars
 *hcl
 key-file.json
 .vscode/
+*.state
