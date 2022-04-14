@@ -72,7 +72,6 @@ jobs:
         with:
           workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.SEED_SA_EMAIL_ADDRESS }}
-          token_format: "access_token"
       - name: Setting up GCP environment
         uses: google-github-actions/setup-gcloud@v0.6.0
       - run: gcloud projects list
