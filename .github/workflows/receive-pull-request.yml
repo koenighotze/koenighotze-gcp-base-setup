@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Run Checkov action
         id: checkov
-        uses: bridgecrewio/checkov-action@v12.1450.0
+        uses: bridgecrewio/checkov-action@v12.1471.0
         with:
           framework: terraform
           # we are fine with Google's Keys
@@ -31,7 +31,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: terraform-linters/setup-tflint@v1
+      - uses: terraform-linters/setup-tflint@v2
         name: Setting up TFLint
         with:
           tflint_version: v0.29.0
