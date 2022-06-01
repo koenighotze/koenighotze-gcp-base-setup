@@ -76,7 +76,7 @@ jobs:
         uses: google-github-actions/setup-gcloud@v0.6.0
       - run: gcloud projects list
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1.3.2
+        uses: hashicorp/setup-terraform@v2
       - name: Terraform Init
         run: terraform init -backend-config="bucket=${{ secrets.TERRAFORM_STATE_BUCKET }}"
       - name: Terraform Format
@@ -104,7 +104,7 @@ jobs:
       - name: Setting up GCP environment
         uses: google-github-actions/setup-gcloud@v0.6.0
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1.3.2
+        uses: hashicorp/setup-terraform@v2
       - name: Init
         run: terraform init -backend-config="bucket=${{ secrets.TERRAFORM_STATE_BUCKET }}"
       - name: Plan
