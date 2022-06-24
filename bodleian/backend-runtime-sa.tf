@@ -17,3 +17,13 @@ resource "google_project_iam_member" "bodleian_backend_service_iam_binding" {
   role    = each.value
   member  = "serviceAccount:${google_service_account.backend_service_sa.email}"
 }
+
+# resource "google_service_account_iam_binding" "backend_service_sa_user_iam_binding_serviceaccountuser" {
+#   service_account_id = google_service_account.backend_service_sa.name
+#   role               = "roles/iam.serviceAccountUser"
+
+#   members = [
+#     "serviceAccount:${module.backend_deployer_sa.email}",
+#     "serviceAccount:${google_service_account.bodleian_infrastructure_service_account.email}"
+#   ]
+# }
