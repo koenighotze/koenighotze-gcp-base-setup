@@ -9,7 +9,7 @@ resource "google_service_account_iam_binding" "workload_identity_sa_binding" {
   ]
 }
 
-resource "google_service_account_iam_binding" "workload_identity_sa_binding" {
+resource "google_service_account_iam_binding" "workload_identity_token_creator_sa_binding" {
   service_account_id = module.backend_deployer_sa.id
   role               = "roles/iam.serviceAccountTokenCreator"
 
