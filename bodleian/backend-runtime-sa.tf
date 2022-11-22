@@ -1,8 +1,8 @@
-# resource "google_service_account" "backend_service_sa" {
-#   project     = data.google_project.project.project_id
-#   account_id  = "bodleian-backend"
-#   description = "Service account for running the backend part"
-# }
+resource "google_service_account" "backend_service_sa" {
+  project     = data.google_project.project.project_id
+  account_id  = "bodleian-backend"
+  description = "Service account for running the backend part"
+}
 
 # # This service must be able to run the backend as part of cloud run
 # #tfsec:ignore:google-iam-no-privileged-service-accounts
