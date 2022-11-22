@@ -10,9 +10,9 @@ output "bodleian_infrastructure_sa_email" {
   value = module.bodleian.infrastructure_sa_email
 }
 
-# output "bodleian_backend_deployer_sa_email" {
-#   value = module.bodleian.backend_deployer_sa_email
-# }
+output "bodleian_backend_deployer_sa_email" {
+  value = module.bodleian.backend_deployer_sa_email
+}
 
 # output "bodleian_frontend_deployer_sa_email" {
 #   value = module.bodleian.frontend_deployer_sa_email
