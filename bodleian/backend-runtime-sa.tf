@@ -23,7 +23,7 @@ resource "google_service_account_iam_binding" "backend_service_sa_user_iam_bindi
   role               = "roles/iam.serviceAccountUser"
 
   members = [
-    "serviceAccount:${module.backend_deployer_sa.email}",
+    # "serviceAccount:${module.backend_deployer_sa.email}",
     "serviceAccount:${google_service_account.bodleian_infrastructure_service_account.email}"
   ]
 }
