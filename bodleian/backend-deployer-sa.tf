@@ -2,7 +2,7 @@
 #tfsec:ignore:google-iam-no-privileged-service-accounts
 resource "google_service_account" "backend_deployer_sa" {
   project      = data.google_project.project.project_id
-  account_id   = "bodleian-backend-cicd"
+  account_id   = "bodleian-backend-cicd-tmp"
   display_name = "bodleian-backend"
   description  = "CI/CD service account for ${data.google_project.project.project_id}"
 }
