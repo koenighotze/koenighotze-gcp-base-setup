@@ -9,7 +9,7 @@ resource "google_service_account" "frontend_deployer_sa" {
 
 # This SA needs to be able to do some privileged work
 #tfsec:ignore:google-iam-no-privileged-service-accounts
-resource "google_project_iam_member" "iam_member_project" {
+resource "google_project_iam_member" "frontend_deployer_sa_iam_member_project" {
   for_each = toset([
     "roles/logging.logWriter",
     "roles/run.developer",
