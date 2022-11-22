@@ -4,7 +4,7 @@ resource "google_service_account_iam_binding" "workload_identity_sa_binding" {
     "roles/iam.serviceAccountTokenCreator"
   ])
 
-  service_account_id = module.backend_deployer_sa.id
+  service_account_id = google_service_account.backend_deployer_sa.id
   role               = each.value
 
   members = [

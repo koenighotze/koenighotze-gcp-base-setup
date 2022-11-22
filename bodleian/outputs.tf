@@ -3,7 +3,7 @@ output "infrastructure_sa_email" {
 }
 
 output "backend_deployer_sa_email" {
-  value = module.backend_deployer_sa.email
+  value = google_service_account.backend_deployer_sa.email
 }
 
 output "backend_service_sa_email" {
