@@ -9,7 +9,6 @@ resource "google_service_account" "frontend_service_sa" {
 resource "google_project_iam_member" "bodleian_frontend_service_iam_binding" {
   for_each = toset([
     "roles/logging.logWriter",
-    "roles/iam.serviceAccountViewer",
     "roles/run.developer",
     "roles/viewer"
   ])
