@@ -8,7 +8,7 @@ locals {
   ]
 
   artifact_writer_sas = [
-    module.bodleian.backend_deployer_sa_email,
+    # module.bodleian.backend_deployer_sa_email,
     # module.bodleian.frontend_deployer_sa_email,
   ]
 }
