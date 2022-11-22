@@ -1,21 +1,21 @@
 # This SA is used by the bodleian-service to deploy resources
 #tfsec:ignore:google-iam-no-privileged-service-accounts
-module "backend_deployer_sa" {
-  source = "github.com/koenighotze/gcp-tf-modules/deployer-service-account"
-
-  name        = "bodleian-backend"
-  project_id  = data.google_project.project.project_id
-  description = "Service account for CICD for the backend part"
+resource "google_service_account" "backend_deployer_sa" {
+  project      = data.google_project.project.project_id
+  account_id   = "bodleian-backend-cicd"
+  display_name = "bodleian-backend"
+  description  = "CI/CD service account for ${data.google_project.project.project_id}"
 }
 
-#tfsec:ignore:google-iam-no-privileged-service-accounts tfsec:ignore:google-iam-no-project-level-service-account-impersonation
-# resource "google_project_iam_member" "backend_deployer_sa_binding" {
-#   for_each = toset([
-#     "roles/run.developer",
-#     "roles/viewer"
-#   ])
-
-#   project = data.google_project.project.project_id
-#   role    = each.key
-#   member  = "serviceAccount:${module.backend_deployer_sa.email}"
-# }
+# This SA needs to be able to do some privileged work
+#tfsec:ignore:google-iam-no-privileged-service-accounts
+resource "google_project_iam_member" "iam_member_project" {
+  for_each = toset([
+    "roles/logging.logWriter",
+    "roles/run.developer",
+    "roles/viewer"
+  ])
+  project = data.google_project.project.project_id
+  role    = each.value
+  member  = "serviceAccount:${google_service_account.backend_deployer_sa.email}"
+}
