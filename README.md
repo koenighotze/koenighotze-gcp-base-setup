@@ -2,6 +2,7 @@
 
 [![Plan](https://github.com/koenighotze/koenighotze-gcp-base-setup/actions/workflows/plan.yml/badge.svg)](https://github.com/koenighotze/koenighotze-gcp-base-setup/actions/workflows/plan.yml)
 [![Apply](https://github.com/koenighotze/koenighotze-gcp-base-setup/actions/workflows/apply.yml/badge.svg)](https://github.com/koenighotze/koenighotze-gcp-base-setup/actions/workflows/apply.yml)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/246d19dc8b6e4c9ca83d371b079c96c8)](https://www.codacy.com/gh/koenighotze/koenighotze-gcp-base-setup/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=koenighotze/koenighotze-gcp-base-setup&amp;utm_campaign=Badge_Grade)
 
 
 Target structure is as follows:
