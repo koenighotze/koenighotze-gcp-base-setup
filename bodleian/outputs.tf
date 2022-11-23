@@ -11,7 +11,7 @@ output "backend_service_sa_email" {
 }
 
 output "frontend_deployer_sa_email" {
-  value = module.frontend_deployer_sa.email
+  value = google_service_account.frontend_deployer_sa.email
 }
 
 output "frontend_service_sa_email" {
