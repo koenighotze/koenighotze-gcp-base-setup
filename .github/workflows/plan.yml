@@ -19,7 +19,7 @@ env:
   TF_VAR_docker_registry_token: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
   TF_IN_AUTOMATION: true
   TF_INPUT: false
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # ${{ secrets.ADMIN_GITHUB_TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.ADMIN_GITHUB_TOKEN }}
   CLOUDSDK_CORE_PROJECT: ${{ secrets.GCP_PROJECT_ID }}
 
 permissions:
