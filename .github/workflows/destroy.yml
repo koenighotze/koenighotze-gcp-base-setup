@@ -3,6 +3,7 @@ name: Destroy
 on:
   workflow_dispatch:
 
+
 env:
   TF_VAR_billing_account_id: ${{ secrets.BILLING_ACCOUNT_ID }}
   TF_VAR_seed_sa_email: ${{ secrets.SEED_SA_EMAIL_ADDRESS }}
@@ -14,16 +15,28 @@ env:
   TF_VAR_codacy_api_token: ${{ secrets.CODACY_API_TOKEN }}
   TF_VAR_docker_registry_username: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
   TF_VAR_docker_registry_token: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
-  TF_INPUT: false
   TF_IN_AUTOMATION: true
+  TF_INPUT: false
   GITHUB_TOKEN: ${{ secrets.ADMIN_GITHUB_TOKEN }}
+  CLOUDSDK_CORE_PROJECT: ${{ secrets.GCP_PROJECT_ID }}
 
 permissions:
   id-token: write
 
 jobs:
+  security-scan:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v3
+      - run: docker run -v ${PWD}:/src aquasec/tfsec:v1.8 /src
+
   destroy:
     runs-on: ubuntu-20.04
+
+    needs:
+      - security-scan
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -34,11 +47,9 @@ jobs:
           service_account: ${{ secrets.SEED_SA_EMAIL_ADDRESS }}
       - name: Setting up GCP environment
         uses: google-github-actions/setup-gcloud@v1.1.0
-        with:
-          export_default_credentials: true
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
       - name: Init
         run: terraform init -backend-config="bucket=${{ secrets.TERRAFORM_STATE_BUCKET }}"
-      - name: Apply
-        run: terraform destroy --auto-approve
+      - name: Plan
+        run: terraform destroy -no-color

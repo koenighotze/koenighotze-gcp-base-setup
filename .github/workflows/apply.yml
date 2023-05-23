@@ -2,6 +2,8 @@ name: Apply
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron:  '0 6 * * 1'
 
 env:
   CLOUDSDK_CORE_PROJECT: ${{ secrets.BASELINE_PROJECT_ID }}
