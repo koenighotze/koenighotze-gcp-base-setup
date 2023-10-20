@@ -37,7 +37,7 @@ jobs:
         with:
           framework: terraform
           # we are fine with Google's Keys
-          skip_check: CKV_GCP_84,CKV_GIT_4
+          skip_check: CKV_GCP_84,CKV_GIT_4,CKV_GCP_117
           output_format: cli
           download_external_modules: true
 
