@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Run Checkov action
         id: checkov
         uses: bridgecrewio/checkov-action@v12.2539.0
@@ -46,14 +46,14 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: docker run -v ${PWD}:/src aquasec/tfsec:v1.8 /src
 
   lint:
     runs-on: ubuntu-20.04
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: terraform-linters/setup-tflint@v4
         name: Setting up TFLint
         with:
@@ -67,7 +67,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Authenticating
         uses: google-github-actions/auth@v1.1.1
         with:
@@ -96,7 +96,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Authenticating
         uses: google-github-actions/auth@v1.1.1
         with:
