@@ -23,5 +23,5 @@ jobs:
           service_account: ${{ secrets.SEED_SA_EMAIL_ADDRESS }}
           token_format: "access_token"
       - name: Setting up GCP environment
-        uses: google-github-actions/setup-gcloud@v1.1.1
+        uses: google-github-actions/setup-gcloud@v2.0.0
       - run: gcloud auth print-identity-token
