@@ -36,3 +36,4 @@ terraform.tfvars
 key-file.json
 .vscode/
 *.state
+variable-defaults.tfvars

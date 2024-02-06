@@ -2,6 +2,8 @@ name: Plan
 
 on:
   push:
+    paths-ignore:
+      - 'scripts/**'
     branches: ["main"]
     tags-ignore: ["**"]
   workflow_dispatch:
