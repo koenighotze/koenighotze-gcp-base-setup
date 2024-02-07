@@ -11,8 +11,6 @@ if [[ "${TRACE-0}" == "1" ]]; then set -o xtrace; fi
 source "$(dirname "$0")/common.sh"
 
 function main() {
-    local SA_EMAIL="${SA_ID}@${SEED_PROJECT}.iam.gserviceaccount.com"
-
     create_seed_sa "$SEED_PROJECT" "$SA_ID" "$SA_EMAIL"
 
     create_iam_bindings "$SEED_PROJECT" "$BILLING_ACCOUNT" "$SA_EMAIL"
@@ -23,20 +21,20 @@ function main() {
 }
 
 function setup_github_secrets() {
-    local SEED_REPOSITORY=$1
-    local SA_EMAIL=$2
+    local repository=$1
+    local saEmail=$2
 
-    echo "Storing service account email in GitHub secrets of repository $SEED_REPOSITORY"
+    echo "Storing service account email in GitHub secrets of repository $repository"
 
-    gh secret set SEED_SA_EMAIL_ADDRESS -R "${SEED_REPOSITORY}" -b "${SA_EMAIL}"
+    gh secret set SEED_SA_EMAIL_ADDRESS -R "${repository}" -b "${saEmail}"
 }
 
 function create_iam_bindings() {
-    local SEED_PROJECT=$1
-    local BILLING_ACCOUNT=$2
-    local SA_EMAIL=$3
+    local seedProject=$1
+    local billingAccount=$2
+    local saEmail=$3
 
-    echo "Creating IAM bindings for $SA_EMAIL in seed project $SEED_PROJECT"
+    echo "Creating IAM bindings for $saEmail in seed project $seedProject"
 
     ROLES=(
         "roles/iam.serviceAccountCreator"
@@ -47,33 +45,32 @@ function create_iam_bindings() {
 
     for role in "${ROLES[@]}"; do
         gcloud projects add-iam-policy-binding \
-            "$SEED_PROJECT" \
-            --member="serviceAccount:$SA_EMAIL" \
+            "$seedProject" \
+            --member="serviceAccount:$saEmail" \
             --role="$role"
     done
 
-    gcloud beta billing accounts add-iam-policy-binding "${BILLING_ACCOUNT}"  \
-        --project="$SEED_PROJECT" \
-        --member="serviceAccount:$SA_EMAIL" \
+    gcloud beta billing accounts add-iam-policy-binding "${billingAccount}"  \
+        --project="$seedProject" \
+        --member="serviceAccount:$saEmail" \
         --role="roles/billing.admin"
 }
 
 function create_seed_sa() {
-    local SEED_PROJECT=$1
-    local SA_ID=$2
-    local SA_EMAIL=$3
+    local project=$1
+    local saId=$2
 
-    echo "Creating seed service account $SA_ID in project $SEED_PROJECT"
+    echo "Creating seed service account $saId in project $project"
 
-    if service_account_exists "$SEED_PROJECT"; then
-        echo "Service account $SA_ID already exists in project $SEED_PROJECT, will not create"
+    if service_account_exists "$project"; then
+        echo "Service account $saId already exists in project $project, will not create"
     else
-        echo "Creating seed service account $SA_ID in project $SEED_PROJECT"
+        echo "Creating seed service account $saId in project $project"
 
-        gcloud iam service-accounts create "$SA_ID" \
-            --project="$SEED_PROJECT" \
+        gcloud iam service-accounts create "$saId" \
+            --project="$project" \
             --display-name "Seed account for Koenighotze"
     fi
 }
 
-main 
+main "$@"

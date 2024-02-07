@@ -25,70 +25,70 @@ function main() {
 }
 
 function create_seed_project() {
-    local SEED_PROJECT=$1
+    local project=$1
 
-    echo "Creating seed project $SEED_PROJECT"
+    echo "Creating seed project $project"
 
-    if project_exists "$SEED_PROJECT"
+    if project_exists "$project"
     then
-        echo "Project $SEED_PROJECT already exists, will not create"
+        echo "Project $project already exists, will not create"
     else
         # since Terraform cannot create projects without an organization,
         # we use gcloud cli for the time being
-        gcloud projects create "$SEED_PROJECT" --name="Koenighotze Seed" --labels=purpose=seed
+        gcloud projects create "$project" --name="Koenighotze Seed" --labels=purpose=seed
     fi
 }
 
 function create_tf_state_bucket() {
-    local SEED_PROJECT=$1
+    local project=$1
 
-    echo "Creating Terraform state bucket for $SEED_PROJECT"
+    echo "Creating Terraform state bucket for $project"
 
-    if bucket_exists "$SEED_PROJECT"
+    if bucket_exists "$project"
     then
-        echo "Bucket gs://$SEED_PROJECT already exists"
+        echo "Bucket gs://$project already exists"
     else
-        gsutil mb -l europe-west3 -p "$SEED_PROJECT" "gs://${SEED_PROJECT}"
+        gsutil mb -l europe-west3 -p "$project" "gs://${project}"
     fi
 }
 
 # Set up GitHub secrets for the seed project
 function setup_github_secrets() {
-    local SEED_REPOSITORY=$1
-    local SEED_PROJECT=$2
-    local BILLING_ACCOUNT=$3
-    local POSTFIX=$4
-    local TERRAFORM_STATE_BUCKET=$5
+    local repository=$1
+    local project=$2
+    local billingAccount=$3
+    local postfix=$4
+    local tfStateBucket=$5
 
-    echo "Setting up GitHub secrets for $SEED_REPOSITORY"
+    echo "Setting up GitHub secrets for $repository"
 
-    gh secret set GCP_PROJECT_ID -R "$SEED_REPOSITORY" -b "$SEED_PROJECT"
-    gh secret set BILLING_ACCOUNT_ID -R "$SEED_REPOSITORY" -b "$BILLING_ACCOUNT"
-    gh secret set GCP_PROJECT_POSTFIX -R "$SEED_REPOSITORY" -b "$POSTFIX"
-    gh secret set TERRAFORM_STATE_BUCKET -R "$SEED_REPOSITORY" -b "$TERRAFORM_STATE_BUCKET"
+    gh secret set GCP_PROJECT_ID -R "$repository" -b "$project"
+    gh secret set BILLING_ACCOUNT_ID -R "$repository" -b "$billingAccount"
+    gh secret set GCP_PROJECT_POSTFIX -R "$repository" -b "$postfix"
+    gh secret set TERRAFORM_STATE_BUCKET -R "$repository" -b "$tfStateBucket"
 }
 
 # Enable required services for the seed project
 function enable_services() {
-    local PROJECT=$1
+    local project=$1
 
     echo "Enabling required services"
 
-    gcloud services enable --project="$PROJECT" cloudresourcemanager.googleapis.com
-    gcloud services enable --project="$PROJECT" cloudbilling.googleapis.com
-    gcloud services enable --project="$PROJECT" billingbudgets.googleapis.com
-    gcloud services enable --project="$PROJECT" iam.googleapis.com
-    gcloud services enable --project="$PROJECT" iamcredentials.googleapis.com
+    gcloud services enable --project="$project" cloudresourcemanager.googleapis.com
+    gcloud services enable --project="$project" cloudbilling.googleapis.com
+    gcloud services enable --project="$project" billingbudgets.googleapis.com
+    gcloud services enable --project="$project" iam.googleapis.com
+    gcloud services enable --project="$project" iamcredentials.googleapis.com
 }
 
 # Enable billing for the seed project
 function enable_billing() {
-    local PROJECT=$1
-    local ACCOUNT=$2
+    local project=$1
+    local billingAccount=$2
 
-    echo "Enabling billing for $PROJECT"
+    echo "Enabling billing for $project"
 
-    gcloud beta billing projects link  "$PROJECT" --billing-account "$ACCOUNT"
+    gcloud beta billing projects link "$project" --billing-account "$billingAccount"
 }
 
 main "$@"

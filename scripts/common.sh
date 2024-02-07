@@ -18,3 +18,4 @@ source "$MY_DIR/functions.sh"
 SEED_PROJECT="koenighotze-seed-$POSTFIX"
 SEED_REPOSITORY=koenighotze/koenighotze-gcp-base-setup
 SA_ID=koenighotze-seed-sa
+SA_EMAIL="${SA_ID}@${SEED_PROJECT}.iam.gserviceaccount.com"
