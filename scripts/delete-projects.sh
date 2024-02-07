@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-POSTFIX=${1?Postfix missing}
+source "$(dirname "$0")/common.sh"
+
+confirm "Really delete the projects?" || exit
 
 # since Terraform cannot create projects without an organization,
 # we use gcloud cli for the time being

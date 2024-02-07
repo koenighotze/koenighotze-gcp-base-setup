@@ -8,16 +8,12 @@ set -o pipefail
 # enable debug mode, by running your script as TRACE=1
 if [[ "${TRACE-0}" == "1" ]]; then set -o xtrace; fi
 
-# BILLING_ACCOUNT=${1?Billing account missing}
-
-MY_DIR="$(dirname "$0")"
-source "$MY_DIR/common.sh"
-source "$MY_DIR/functions.sh"
+source "$(dirname "$0")/common.sh"
 
 function main() {
     create_seed_project "$SEED_PROJECT"
 
-    enable_services
+    enable_services "$SEED_PROJECT"
 
     enable_billing "$SEED_PROJECT" "$BILLING_ACCOUNT"
 
@@ -35,7 +31,7 @@ function create_seed_project() {
 
     if project_exists "$SEED_PROJECT"
     then
-        echo "Project $SEED_PROJECT already exists"
+        echo "Project $SEED_PROJECT already exists, will not create"
     else
         # since Terraform cannot create projects without an organization,
         # we use gcloud cli for the time being
@@ -74,13 +70,15 @@ function setup_github_secrets() {
 
 # Enable required services for the seed project
 function enable_services() {
+    local PROJECT=$1
+
     echo "Enabling required services"
 
-    gcloud services enable cloudresourcemanager.googleapis.com
-    gcloud services enable cloudbilling.googleapis.com
-    gcloud services enable billingbudgets.googleapis.com
-    gcloud services enable iam.googleapis.com
-    gcloud services enable iamcredentials.googleapis.com
+    gcloud services enable --project="$PROJECT" cloudresourcemanager.googleapis.com
+    gcloud services enable --project="$PROJECT" cloudbilling.googleapis.com
+    gcloud services enable --project="$PROJECT" billingbudgets.googleapis.com
+    gcloud services enable --project="$PROJECT" iam.googleapis.com
+    gcloud services enable --project="$PROJECT" iamcredentials.googleapis.com
 }
 
 # Enable billing for the seed project
@@ -90,7 +88,6 @@ function enable_billing() {
 
     echo "Enabling billing for $PROJECT"
 
-    gcloud config set project "$PROJECT"
     gcloud beta billing projects link  "$PROJECT" --billing-account "$ACCOUNT"
 }
 

@@ -8,6 +8,10 @@ set -o pipefail
 # enable debug mode, by running your script as TRACE=1
 if [[ "${TRACE-0}" == "1" ]]; then set -o xtrace; fi
 
+MY_DIR="$(dirname "$0")"
+source "$MY_DIR/local.sh"
+source "$MY_DIR/functions.sh"
+
 : ${POSTFIX}
 : ${BILLING_ACCOUNT}
 

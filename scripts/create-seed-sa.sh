@@ -8,9 +8,7 @@ set -o pipefail
 # enable debug mode, by running your script as TRACE=1
 if [[ "${TRACE-0}" == "1" ]]; then set -o xtrace; fi
 
-MY_DIR="$(dirname "$0")"
-source "$MY_DIR/common.sh"
-source "$MY_DIR/functions.sh"
+source "$(dirname "$0")/common.sh"
 
 function main() {
     local SA_EMAIL="${SA_ID}@${SEED_PROJECT}.iam.gserviceaccount.com"
@@ -28,6 +26,8 @@ function setup_github_secrets() {
     local SEED_REPOSITORY=$1
     local SA_EMAIL=$2
 
+    echo "Storing service account email in GitHub secrets of repository $SEED_REPOSITORY"
+
     gh secret set SEED_SA_EMAIL_ADDRESS -R "${SEED_REPOSITORY}" -b "${SA_EMAIL}"
 }
 
@@ -35,6 +35,8 @@ function create_iam_bindings() {
     local SEED_PROJECT=$1
     local BILLING_ACCOUNT=$2
     local SA_EMAIL=$3
+
+    echo "Creating IAM bindings for $SA_EMAIL in seed project $SEED_PROJECT"
 
     ROLES=(
         "roles/iam.serviceAccountCreator"
@@ -61,12 +63,15 @@ function create_seed_sa() {
     local SA_ID=$2
     local SA_EMAIL=$3
 
+    echo "Creating seed service account $SA_ID in project $SEED_PROJECT"
+
     if service_account_exists "$SEED_PROJECT"; then
-        echo "Service account $SA_ID already exists in project $SEED_PROJECT"
+        echo "Service account $SA_ID already exists in project $SEED_PROJECT, will not create"
     else
         echo "Creating seed service account $SA_ID in project $SEED_PROJECT"
 
         gcloud iam service-accounts create "$SA_ID" \
+            --project="$SEED_PROJECT" \
             --display-name "Seed account for Koenighotze"
     fi
 }

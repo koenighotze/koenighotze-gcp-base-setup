@@ -1,8 +1,17 @@
 #!/usr/bin/env bash
-set -euo pipefail
+# when a command fails, bash exits instead of continuing with the rest of the script
+set -o errexit
+# make the script fail, when accessing an unset variable
+set -o nounset
+# pipeline command is treated as failed, even if one command in the pipeline fails
+set -o pipefail
+# enable debug mode, by running your script as TRACE=1
+if [[ "${TRACE-0}" == "1" ]]; then set -o xtrace; fi
 
-POSTFIX=${1?Postfix missing}
-SEED_PROJECT_ID="koenighotze-seed-$POSTFIX"
+source "$(dirname "$0")/common.sh"
+
+confirm "Really delete the project?" || exit
+
 # since Terraform cannot create projects without an organization,
 # we use gcloud cli for the time being
-gcloud projects delete "$SEED_PROJECT_ID"
+gcloud projects delete "$SEED_PROJECT"

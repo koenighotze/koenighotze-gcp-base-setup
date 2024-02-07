@@ -37,3 +37,4 @@ key-file.json
 .vscode/
 *.state
 variable-defaults.tfvars
+scripts/local.sh
