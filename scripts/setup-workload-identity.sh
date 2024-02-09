@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC1091
 # when a command fails, bash exits instead of continuing with the rest of the script
 set -o errexit
 # make the script fail, when accessing an unset variable
@@ -14,7 +15,8 @@ function workload_identity_pool_exists() {
   local project_id=$1
   local workload_identity_pool="$2"
 
-  local existing_pool=$(
+  local existing_pool
+  existing_pool=$(
     gcloud iam workload-identity-pools describe "$workload_identity_pool" \
       --project="$project_id" \
       --location="global" \
@@ -59,7 +61,8 @@ function workload_identity_pool_provider_exists() {
   local provider_id="$1"
   local workload_identity_pool="$2"
 
-  local existing_provider=$(
+  local existing_provider
+  existing_provider=$(
     gcloud iam workload-identity-pools providers describe "$provider_id" \
       --workload-identity-pool="$workload_identity_pool" \
       --location="global" \
@@ -118,12 +121,15 @@ function setup_github_secrets() {
 }
 
 function main() {
+  # shellcheck disable=SC2153
   setup_workload_pool "$SEED_PROJECT" "$WORKLOAD_IDENTITY_POOL"
 
   workload_identity_pool_id=$(fetch_workload_identity_pool_id "$WORKLOAD_IDENTITY_POOL")
 
+  # shellcheck disable=SC2153
   link_github_oidc_to_workload_pool "$PROVIDER_ID" "$WORKLOAD_IDENTITY_POOL"
   
+  # shellcheck disable=SC2153
   allow_seed_repository_access_to_the_seed_account "$SA_EMAIL" "$workload_identity_pool_id" "$SEED_REPOSITORY"
 
   setup_github_secrets "$PROVIDER_ID" "$workload_identity_pool_id" "$SEED_REPOSITORY" 

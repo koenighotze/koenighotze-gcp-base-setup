@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC1091
 # when a command fails, bash exits instead of continuing with the rest of the script
 set -o errexit
 # make the script fail, when accessing an unset variable
@@ -12,15 +13,19 @@ source "$(dirname "$0")/common.sh"
 
 function main() {
     local platform_roles
+    # shellcheck disable=SC2034
     platform_roles=("roles/serviceusage.serviceUsageAdmin" "roles/resourcemanager.projectIamAdmin" "roles/artifactregistry.admin")
     local platform_apis
+    # shellcheck disable=SC2034
     platform_apis=("artifactregistry.googleapis.com")
 
     create_and_setup_project "platform" "$SA_EMAIL" "$BILLING_ACCOUNT" platform_roles platform_apis
 
     local bodleian_roles
+    # shellcheck disable=SC2034
     bodleian_roles=("roles/iam.serviceAccountAdmin" "roles/resourcemanager.projectIamAdmin" "roles/storage.admin" "roles/monitoring.admin" "roles/serviceusage.serviceUsageAdmin")
     local bodleian_apis
+    # shellcheck disable=SC2034
     bodleian_apis=("run.googleapis.com")
 
     create_and_setup_project "bodleian" "$SA_EMAIL" "$BILLING_ACCOUNT" bodleian_roles bodleian_apis
@@ -45,7 +50,7 @@ function enable_services() {
     gcloud services enable cloudbilling.googleapis.com --project "${projectId}"
     gcloud services enable iam.googleapis.com --project "${projectId}"
 
-    for api in ${apis[@]}; do
+    for api in "${apis[@]}"; do
         echo "Enabling service $api for project $projectId"
         gcloud services enable "$api" --project "${projectId}"
     done
@@ -58,7 +63,7 @@ function enable_iam_binding() {
 
     echo "Enabling IAM binding for project $projectId and $saEmail"
 
-    for role in ${roles[@]}; do
+    for role in "${roles[@]}"; do
         echo "Enabling role $role for project $projectId"
         gcloud projects add-iam-policy-binding "${projectId}" \
             --member="serviceAccount:$saEmail" \
