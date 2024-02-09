@@ -9,8 +9,9 @@ set -o pipefail
 if [[ "${TRACE-0}" == "1" ]]; then set -o xtrace; fi
 
 function service_account_exists() {
-  local projectId=$1
-  local existing_sa=$(gcloud iam service-accounts list --project=$projectId --format="value(name)")
+  local project_id="$1"
+  local existing_sa
+  existing_sa=$(gcloud iam service-accounts list --project="$project_id" --format="value(name)")
 
   if [ -z "$existing_sa" ] 
   then
@@ -21,8 +22,9 @@ function service_account_exists() {
 }
 
 function project_exists() {
-  local projectId=$1
-  local existing_project=$(gcloud projects list --filter=PROJECT_ID=$projectId --format="value(PROJECT_ID)")
+  local project_id="$1"
+  local existing_project
+  existing_project=$(gcloud projects list --filter=PROJECT_ID="$project_id" --format="value(PROJECT_ID)")
 
   if [ -z "$existing_project" ] 
   then
@@ -33,8 +35,9 @@ function project_exists() {
 }
 
 function bucket_exists() {
-  local bucket_name=$1
-  local existing_bucket=$(gcloud storage buckets list --filter=name=$bucket_name --format="value(name)")
+  local bucket_name="$1"
+  local existing_bucket
+  existing_bucket=$(gcloud storage buckets list --filter=name="$bucket_name" --format="value(name)")
 
   if [ -z "$existing_bucket" ] 
   then

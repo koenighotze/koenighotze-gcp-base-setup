@@ -11,12 +11,16 @@ if [[ "${TRACE-0}" == "1" ]]; then set -o xtrace; fi
 source "$(dirname "$0")/common.sh"
 
 function main() {
+    local platform_roles
     platform_roles=("roles/serviceusage.serviceUsageAdmin" "roles/resourcemanager.projectIamAdmin" "roles/artifactregistry.admin")
+    local platform_apis
     platform_apis=("artifactregistry.googleapis.com")
 
     create_and_setup_project "platform" "$SA_EMAIL" "$BILLING_ACCOUNT" platform_roles platform_apis
 
+    local bodleian_roles
     bodleian_roles=("roles/iam.serviceAccountAdmin" "roles/resourcemanager.projectIamAdmin" "roles/storage.admin" "roles/monitoring.admin" "roles/serviceusage.serviceUsageAdmin")
+    local bodleian_apis
     bodleian_apis=("run.googleapis.com")
 
     create_and_setup_project "bodleian" "$SA_EMAIL" "$BILLING_ACCOUNT" bodleian_roles bodleian_apis

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC1091,SC2034
 # when a command fails, bash exits instead of continuing with the rest of the script
 set -o errexit
 # make the script fail, when accessing an unset variable
@@ -12,10 +13,12 @@ MY_DIR="$(dirname "$0")"
 source "$MY_DIR/local.sh"
 source "$MY_DIR/functions.sh"
 
-: ${POSTFIX}
-: ${BILLING_ACCOUNT}
+: "${POSTFIX}"
+: "${BILLING_ACCOUNT}"
 
 SEED_PROJECT="koenighotze-seed-$POSTFIX"
 SEED_REPOSITORY=koenighotze/koenighotze-gcp-base-setup
 SA_ID=koenighotze-seed-sa
 SA_EMAIL="${SA_ID}@${SEED_PROJECT}.iam.gserviceaccount.com"
+WORKLOAD_IDENTITY_POOL=github-cicd-pool
+PROVIDER_ID=github-provider
