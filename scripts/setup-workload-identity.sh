@@ -57,6 +57,16 @@ function fetch_workload_identity_pool_id() {
     --format="value(name)"
 }
 
+function fetch_workload_identity_pool_provider_id() {
+  local provider_id="$1"
+  local workload_identity_pool="$2"
+
+  gcloud iam workload-identity-pools providers describe "$provider_id" \
+    --workload-identity-pool="$workload_identity_pool" \
+    --location="global" \
+    --format="value(name)"
+}
+
 function workload_identity_pool_provider_exists() {
   local provider_id="$1"
   local workload_identity_pool="$2"
@@ -125,6 +135,7 @@ function main() {
   setup_workload_pool "$SEED_PROJECT" "$WORKLOAD_IDENTITY_POOL"
 
   workload_identity_pool_id=$(fetch_workload_identity_pool_id "$WORKLOAD_IDENTITY_POOL")
+  workload_identity_pool_provider_id=$(fetch_workload_identity_pool_provider_id "$PROVIDER_ID" "$WORKLOAD_IDENTITY_POOL")
 
   # shellcheck disable=SC2153
   link_github_oidc_to_workload_pool "$PROVIDER_ID" "$WORKLOAD_IDENTITY_POOL"
@@ -132,7 +143,7 @@ function main() {
   # shellcheck disable=SC2153
   allow_seed_repository_access_to_the_seed_account "$SA_EMAIL" "$workload_identity_pool_id" "$SEED_REPOSITORY"
 
-  setup_github_secrets "$PROVIDER_ID" "$workload_identity_pool_id" "$SEED_REPOSITORY" 
+  setup_github_secrets "$workload_identity_pool_provider_id" "$workload_identity_pool_id" "$SEED_REPOSITORY" 
 }
 
 main "$@"
