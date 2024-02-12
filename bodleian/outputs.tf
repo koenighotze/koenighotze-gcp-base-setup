@@ -18,9 +18,9 @@ output "frontend_service_sa_email" {
   value = google_service_account.frontend_service_sa.email
 }
 
-output "state_bucket_url" {
-  value = module.bodleian_project.state_bucket_url
-}
+# output "state_bucket_url" {
+#   value = module.bodleian_project.state_bucket_url
+# }
 
 output "cloudrun_sa_email" {
   value = "service-${data.google_project.project.number}@serverless-robot-prod.iam.gserviceaccount.com"
