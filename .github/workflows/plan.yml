@@ -3,7 +3,7 @@ name: Plan
 on:
   push:
     paths-ignore:
-      - 'scripts/**'
+      - "scripts/**"
     branches: ["main"]
     tags-ignore: ["**"]
   workflow_dispatch:
@@ -11,7 +11,7 @@ on:
 env:
   TF_VAR_billing_account_id: ${{ secrets.BILLING_ACCOUNT_ID }}
   TF_VAR_seed_sa_email: ${{ secrets.SEED_SA_EMAIL_ADDRESS }}
-  TF_VAR_github_admin_token: ${{ secrets.ADMIN_GITHUB_TOKEN }}
+  TF_VAR_github_admin_token: ${{ secrets.KOENIGHOTZE-GCP-BASE-SETUP_ADMIN_GITHUB_TOKEN }}
   TF_VAR_github_api_label_token: ${{ secrets.GH_TOKEN_FOR_LABELING }}
   TF_VAR_project_postfix: ${{ secrets.GCP_PROJECT_POSTFIX }}
   TF_VAR_workload_identity_provider_name: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
@@ -21,7 +21,7 @@ env:
   TF_VAR_docker_registry_token: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
   TF_IN_AUTOMATION: true
   TF_INPUT: false
-  GITHUB_TOKEN: ${{ secrets.ADMIN_GITHUB_TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.KOENIGHOTZE-GCP-BASE-SETUP_ADMIN_GITHUB_TOKEN }}
   CLOUDSDK_CORE_PROJECT: ${{ secrets.GCP_PROJECT_ID }}
 
 permissions:
