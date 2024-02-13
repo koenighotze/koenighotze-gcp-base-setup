@@ -3,4 +3,10 @@ fileignoreconfig:
   checksum: be6900fb98e73c98021902a375a6b17b2dbd135c73d6a1b3bec35db259dca262
 - filename: .github/workflows/plan.yml
   checksum: 765c6644c6ee3c1bef4ce752df28dea39497de31c5723ea8c19d8f25a282d3ba
+- filename: .github/workflows/destroy.yml
+  checksum: 9e411ff93fc87651c19080de2538d939302e5e16068d9e1d7175d89dd0f9e218
+- filename: .github/workflows/receive-pull-request.yml
+  checksum: a352b3ff11535ee1dbde2fa1be20c27eeb47e949d75813dc8d6a1c2d0723a468
+- filename: .github/workflows/apply.yml
+  checksum: 14e74da1c652a7c934da15eda3b90e15fc6fd43b4f7267525248b8569f037b9a
 version: ""
