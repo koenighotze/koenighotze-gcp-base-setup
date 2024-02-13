@@ -15,7 +15,8 @@ jobs:
         with:
           framework: terraform
           # we are fine with Google's Keys
-          skip_check: CKV_GCP_84,CKV_GIT_4
+          # we are fine with basic roles (no org), we are fine with our own module
+          skip_check: CKV_GCP_84,CKV_GIT_4,CKV_GCP_117,CKV_TF_1
           output_format: cli
           download_external_modules: true
 
@@ -49,27 +50,3 @@ jobs:
         uses: hashicorp/setup-terraform@v3
       - name: Terraform Format
         run: terraform fmt -check -recursive
-
-  mark-pr:
-    needs:
-      - lint
-      - qa
-      - compliance-scan
-      - security-scan
-
-    runs-on: ubuntu-20.04
-
-    permissions:
-      pull-requests: write
-
-    steps:
-      - uses: actions/checkout@v4
-
-      # - uses: actions-ecosystem/action-add-labels@v1.1.0
-      #   with:
-      #     labels: |
-      #       linted
-      #       qaed
-      #       ready-for-review
-      #     github_token: ${{ secrets.GH_TOKEN_FOR_LABELING }}
-      #     number: ${{ github.event.number }}
