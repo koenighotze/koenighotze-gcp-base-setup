@@ -6,7 +6,10 @@ resource "google_storage_bucket" "state_bucket" {
   uniform_bucket_level_access = true
   force_destroy               = true
 
+  public_access_prevention = "enforced"
+
   versioning {
+    #checkov:skip=CKV_GCP_78:We don't version states
     enabled = false
   }
 }

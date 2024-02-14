@@ -15,7 +15,8 @@ resource "google_project_iam_binding" "iam_binding_project" {
   ])
 
   project = data.google_project.project.project_id
-  role    = each.key
+  #checkov:skip=CKV_GCP_117:Allow admin for this bucket
+  role = each.key
 
   members = [
     "serviceAccount:${google_service_account.sa.email}"
