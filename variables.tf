@@ -11,11 +11,8 @@ variable "seed_sa_email" {
 }
 
 variable "region" {
+  type    = string
   default = "europe-west3"
-}
-
-variable "environment" {
-  default = "dev"
 }
 
 variable "github_admin_token" {
@@ -51,14 +48,14 @@ variable "codacy_api_token" {
   description = "The API token for uploading coverage data"
 }
 
-variable "docker_registry_username" {
-  type        = string
-  sensitive   = true
-  description = "The username for uploading images to docker hub"
-}
+# variable "docker_registry_username" {
+#   type        = string
+#   sensitive   = true
+#   description = "The username for uploading images to docker hub"
+# }
 
-variable "docker_registry_token" {
-  type        = string
-  sensitive   = true
-  description = "The API token for uploading images to docker hub"
-}
+# variable "docker_registry_token" {
+#   type        = string
+#   sensitive   = true
+#   description = "The API token for uploading images to docker hub"
+# }

@@ -5,8 +5,8 @@ terraform {
   }
 }
 
-locals {
-  common_labels = {
-    environment = var.environment
-  }
-}
+# locals {
+#   common_labels = {
+#     environment = var.environment
+#   }
+# }
