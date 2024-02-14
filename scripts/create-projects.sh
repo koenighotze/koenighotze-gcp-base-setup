@@ -29,6 +29,15 @@ function main() {
     bodleian_apis=("run.googleapis.com")
 
     create_and_setup_project "bodleian" "$SA_EMAIL" "$BILLING_ACCOUNT" bodleian_roles bodleian_apis
+
+    local gcp_terraform_examples_roles
+    # shellcheck disable=SC2034
+    gcp_terraform_examples_roles=("roles/iam.serviceAccountAdmin" "roles/resourcemanager.projectIamAdmin" "roles/storage.admin" "roles/monitoring.admin" "roles/serviceusage.serviceUsageAdmin")
+    local gcp_terraform_examples_apis
+    # shellcheck disable=SC2034
+    gcp_terraform_examples_apis=("run.googleapis.com")
+
+    create_and_setup_project "terraform-examples" "$SA_EMAIL" "$BILLING_ACCOUNT" gcp_terraform_examples_roles gcp_terraform_examples_apis
 }
 
 function enable_billing() {

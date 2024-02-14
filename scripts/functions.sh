@@ -57,7 +57,8 @@ function create_project() {
   then
       echo "Project $projectId already exists, will not create"
   else
-      gcloud projects create "${projectId}" --name="Koenighotze $projectId"
+      display_name=$(echo "Koenighotze $projectId" | cut -c 1-30)
+      gcloud projects create "${projectId}" --name="$display_name"
   fi
 }
 
