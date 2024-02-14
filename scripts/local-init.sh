@@ -16,7 +16,7 @@ source "$(dirname "$0")/common.sh"
 # gcloud auth application-default login
 
 if bucket_exists "$SEED_PROJECT"; then
-    tf init -backend-config="bucket=$SEED_PROJECT"
+    terraform init -backend-config="bucket=$SEED_PROJECT"
 else
     echo "Missing bucket '$SEED_PROJECT'; cannot initialize backend"
     exit 1 

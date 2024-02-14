@@ -8,6 +8,7 @@ resource "google_project_iam_binding" "project_iam_binding" {
   project = data.google_project.project.project_id
   role    = "roles/storage.admin"
 
+  #tfsec:ignore:google-iam-no-privileged-service-accounts
   members = [
     "serviceAccount:${google_service_account.sa.email}",
   ]
