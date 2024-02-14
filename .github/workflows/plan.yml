@@ -87,7 +87,6 @@ jobs:
     needs:
       - qa
       - lint
-      - security-scan
       - compliance-scan
 
     steps:
