@@ -1,5 +1,7 @@
 fileignoreconfig:
 - filename: terraform-examples/repository-secrets.tf
+  checksum: 0f7f9f682a1bc5fc44a27fcbaf5b91bb94ce43fde614f2732927429cf57451c1
+- filename: terraform-examples/repository-secrets.tf
   checksum: d6cc12d8abc1559b0d839fbcf471cf48480fd1e941095e76bec1c59f94e2bc37
 - filename: .github/workflows/plan.yml
   checksum: be6900fb98e73c98021902a375a6b17b2dbd135c73d6a1b3bec35db259dca262
