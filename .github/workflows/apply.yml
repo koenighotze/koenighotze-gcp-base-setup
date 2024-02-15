@@ -45,9 +45,6 @@ jobs:
   apply:
     runs-on: ubuntu-20.04
 
-    needs:
-      - security-scan
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
