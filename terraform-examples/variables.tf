@@ -24,3 +24,9 @@ variable "workload_identity_pool_id" {
   type        = string
   description = "The id of the workload identity pool"
 }
+
+variable "admin_sa_email" {
+  type        = string
+  sensitive   = true
+  description = "Email address of the admin service account"
+}

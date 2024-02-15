@@ -11,5 +11,6 @@ resource "google_project_iam_binding" "project_iam_binding" {
   #tfsec:ignore:google-iam-no-privileged-service-accounts
   members = [
     "serviceAccount:${google_service_account.sa.email}",
+    "serviceAccount:${var.admin_sa_email}"
   ]
 }
