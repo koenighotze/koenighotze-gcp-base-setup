@@ -2,7 +2,8 @@ locals {
   common_apis = [
     "cloudresourcemanager.googleapis.com",
     "billingbudgets.googleapis.com",
-    "cloudbilling.googleapis.com"
+    "cloudbilling.googleapis.com",
+    "compute.googleapis.com",
   ]
 }
 
