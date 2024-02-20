@@ -4,6 +4,7 @@ locals {
     "billingbudgets.googleapis.com",
     "cloudbilling.googleapis.com",
     "compute.googleapis.com",
+    "cloudasset.googleapis.com",
   ]
 }
 
