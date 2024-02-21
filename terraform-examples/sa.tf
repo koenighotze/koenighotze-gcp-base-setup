@@ -5,8 +5,7 @@ resource "google_service_account" "sa" {
   description  = "Service account for handling the TF Examples"
 }
 
-#tfsec:ignore:google-iam-no-privileged-service-accounts
-resource "google_project_iam_binding" "iam_binding_project" {
+resource "google_project_iam_member" "iam_member_project" {
   for_each = toset([
     "roles/compute.admin",
     "roles/iam.serviceAccountAdmin",
@@ -21,7 +20,5 @@ resource "google_project_iam_binding" "iam_binding_project" {
   #checkov:skip=CKV_GCP_49:Allow admin for this sa
   role = each.key
 
-  members = [
-    "serviceAccount:${google_service_account.sa.email}"
-  ]
+  member = "serviceAccount:${google_service_account.sa.email}"
 }
