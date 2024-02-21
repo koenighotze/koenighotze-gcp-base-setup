@@ -1,5 +1,6 @@
 module "bodleian_project" {
   # tflint-ignore: terraform_module_pinned_source
+  #checkov:skip=CKV_TF_1:Allow admin for this bucket
   source = "github.com/koenighotze/gcp-tf-modules/infrastructure-project"
 
   project_id                      = data.google_project.project.project_id

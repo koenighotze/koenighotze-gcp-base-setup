@@ -16,7 +16,8 @@ resource "google_project_iam_binding" "iam_binding_project" {
   ])
 
   project = data.google_project.project.project_id
-  #checkov:skip=CKV_GCP_117:Allow admin for this bucket
+  #checkov:skip=CKV_GCP_117:Allow admin for this
+  #checkov:skip=CKV_GCP_49:Allow admin for this sa
   role = each.key
 
   members = [

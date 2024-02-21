@@ -5,8 +5,8 @@ resource "google_service_account" "bodleian_infrastructure_service_account" {
   description  = "Service account for infrastructure activities on this project"
 }
 
-#tfsec:ignore:google-iam-no-privileged-service-accounts
 resource "google_project_iam_binding" "bodleian_infrastructure_iam_binding_project" {
+  #checkov:skip=CKV_GCP_117:Allow admin for this bucket
   for_each = toset([
     "roles/logging.logWriter",
     "roles/iam.serviceAccountViewer",

@@ -16,4 +16,4 @@ tflint -f compact --disable-rule=terraform_module_pinned_source --disable-rule=t
 terraform validate -no-color
 terraform fmt -check -recursive
 
-checkov -d .
+checkov --quiet -d .

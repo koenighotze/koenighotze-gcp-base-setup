@@ -5,8 +5,8 @@ resource "google_service_account" "frontend_service_sa" {
 }
 
 # # # This service must be able to run the frontend as part of cloud run
-# # #tfsec:ignore:google-iam-no-privileged-service-accounts
 resource "google_project_iam_member" "bodleian_frontend_service_iam_binding" {
+  #checkov:skip=CKV_GCP_117:Allow admin for this
   for_each = toset([
     "roles/logging.logWriter",
     "roles/iam.serviceAccountViewer",
