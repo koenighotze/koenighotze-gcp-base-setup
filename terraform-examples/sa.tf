@@ -11,6 +11,7 @@ resource "google_project_iam_binding" "iam_binding_project" {
     "roles/logging.logWriter",
     "roles/iam.serviceAccountViewer",
     "roles/run.admin",
+    "roles/compute.admin",
     "roles/viewer"
   ])
 
