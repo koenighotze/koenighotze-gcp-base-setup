@@ -10,6 +10,7 @@ resource "google_project_iam_binding" "iam_binding_project" {
   for_each = toset([
     "roles/compute.admin",
     "roles/iam.serviceAccountAdmin",
+    "roles/iam.securityAdmin",
     "roles/logging.logWriter",
     "roles/run.admin",
     "roles/viewer"
