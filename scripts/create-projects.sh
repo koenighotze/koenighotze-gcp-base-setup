@@ -10,34 +10,24 @@ set -o pipefail
 if [[ "${TRACE-0}" == "1" ]]; then set -o xtrace; fi
 
 source "$(dirname "$0")/common.sh"
+source "$(dirname "$0")/projects.sh"
 
 function main() {
-    local platform_roles
-    # shellcheck disable=SC2034
-    platform_roles=("roles/serviceusage.serviceUsageAdmin" "roles/resourcemanager.projectIamAdmin" "roles/artifactregistry.admin")
-    local platform_apis
-    # shellcheck disable=SC2034
-    platform_apis=("artifactregistry.googleapis.com")
+    for project in "${PROJECTS[@]}"; do
+        create_project "$project" "$BILLING_ACCOUNT"
+    done
+}
 
-    create_and_setup_project "platform" "$SA_EMAIL" "$BILLING_ACCOUNT" platform_roles platform_apis
+function create_project () {
+    local projectId="${1}-${POSTFIX}"
+    local billingAccount="$2"
 
-    local bodleian_roles
-    # shellcheck disable=SC2034
-    bodleian_roles=("roles/iam.serviceAccountAdmin" "roles/resourcemanager.projectIamAdmin" "roles/storage.admin" "roles/monitoring.admin" "roles/serviceusage.serviceUsageAdmin")
-    local bodleian_apis
-    # shellcheck disable=SC2034
-    bodleian_apis=("run.googleapis.com")
+    echo "Creating project $projectId"
 
-    create_and_setup_project "bodleian" "$SA_EMAIL" "$BILLING_ACCOUNT" bodleian_roles bodleian_apis
+    create_project "$projectId"
+    enable_billing "$projectId" "$billingAccount"
 
-    local gcp_terraform_examples_roles
-    # shellcheck disable=SC2034
-    gcp_terraform_examples_roles=("roles/iam.serviceAccountAdmin" "roles/resourcemanager.projectIamAdmin" "roles/storage.admin" "roles/monitoring.admin" "roles/serviceusage.serviceUsageAdmin")
-    local gcp_terraform_examples_apis
-    # shellcheck disable=SC2034
-    gcp_terraform_examples_apis=("run.googleapis.com")
-
-    create_and_setup_project "terraform-examples" "$SA_EMAIL" "$BILLING_ACCOUNT" gcp_terraform_examples_roles gcp_terraform_examples_apis
+    echo "Finished with project $projectId"
 }
 
 function enable_billing() {
@@ -47,57 +37,6 @@ function enable_billing() {
     echo "Enabling billing account $billingAccount for project $projectId"
 
     gcloud beta billing projects link "${projectId}" --billing-account="${billingAccount}"
-}
-
-function enable_services() {
-    local projectId="$1"; shift
-    local apis=("$@")
-
-    echo "Enabling common services for project $projectId"
-
-    gcloud services enable cloudresourcemanager.googleapis.com --project "${projectId}"
-    gcloud services enable cloudbilling.googleapis.com --project "${projectId}"
-    gcloud services enable iam.googleapis.com --project "${projectId}"
-
-    for api in "${apis[@]}"; do
-        echo "Enabling service $api for project $projectId"
-        gcloud services enable "$api" --project "${projectId}"
-    done
-}
-
-function enable_iam_binding() {
-    local projectId="${1}"
-    local saEmail="${2}"; shift 2
-    local roles=("$@")
-
-    echo "Enabling IAM binding for project $projectId and $saEmail"
-
-    for role in "${roles[@]}"; do
-        echo "Enabling role $role for project $projectId"
-        gcloud projects add-iam-policy-binding "${projectId}" \
-            --member="serviceAccount:$saEmail" \
-            --role="$role"
-    done
-}
-
-function create_and_setup_project () {
-    local projectId="${1}-${POSTFIX}"
-    local saEmail="$2" 
-    local billingAccount="$3"
-    local -n _roles=$4
-    local -n _apis=$5
-
-    echo "Creating project $projectId with billing account $billingAccount and service account $saEmail"
-
-    create_project "$projectId"
-
-    enable_billing "$projectId" "$billingAccount"
-    
-    enable_services "$projectId" "${_apis[@]}"
-
-    enable_iam_binding "$projectId" "$saEmail" "${_roles[@]}"
-
-    echo "Finished with project $projectId"
 }
 
 main "$@"

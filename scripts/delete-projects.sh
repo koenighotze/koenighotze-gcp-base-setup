@@ -3,13 +3,14 @@
 set -euo pipefail
 
 source "$(dirname "$0")/common.sh"
+source "$(dirname "$0")/projects.sh"
 
 confirm "Really delete the projects?" || exit
 
 # since Terraform cannot create projects without an organization,
 # we use gcloud cli for the time being
-for projectId in bodleian platform; do
-    echo "Project: ${projectId}-${POSTFIX}"
+for project in "${PROJECTS[@]}"; do
+    echo "Project: ${project}-${POSTFIX}"
 
-    gcloud projects delete "${projectId}-${POSTFIX}"
+    gcloud projects delete "${project}-${POSTFIX}"
 done

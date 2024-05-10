@@ -1,0 +1,107 @@
+name: Apply
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - bootstrap/**
+
+env:
+  TF_VAR_billing_account_id: ${{ secrets.BILLING_ACCOUNT_ID }}
+  TF_VAR_seed_sa_email: ${{ secrets.SEED_SA_EMAIL_ADDRESS }}
+  TF_VAR_github_admin_token: ${{ secrets.ADMIN_GITHUB_TOKEN }}
+  TF_VAR_project_postfix: ${{ secrets.GCP_PROJECT_POSTFIX }}
+  TF_IN_AUTOMATION: true
+  TF_INPUT: false
+  GITHUB_TOKEN: ${{ secrets.ADMIN_GITHUB_TOKEN }}
+  GH_TOKEN: ${{ secrets.ADMIN_GITHUB_TOKEN }}
+  CLOUDSDK_CORE_PROJECT: ${{ secrets.GCP_PROJECT_ID }}
+
+permissions:
+  id-token: write
+
+defaults:
+  run:
+    working-directory: ./bootstrap
+
+jobs:
+  compliance-scan:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Run Checkov action
+        id: checkov
+        uses: bridgecrewio/checkov-action@v12.2717.0
+        with:
+          framework: terraform
+          # we are fine with Google's Keys
+          # we are fine with basic roles (no org), we are fine with our own module
+          skip_check: CKV_GCP_84,CKV_GIT_4,CKV_GCP_117,CKV_TF_1
+          output_format: cli
+          download_external_modules: true
+
+  lint:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: terraform-linters/setup-tflint@v4
+        name: Setting up TFLint
+        with:
+          tflint_version: v0.29.0
+      - name: Initializing TFLint
+        run: tflint --init
+      - name: Linting
+        run: tflint -f compact --disable-rule=terraform_module_pinned_source
+
+  qa:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Authenticating
+        uses: google-github-actions/auth@v2.1.2
+        with:
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.SEED_SA_EMAIL_ADDRESS }}
+      - name: Setting up GCP environment
+        uses: google-github-actions/setup-gcloud@v2.1.0
+      - run: gcloud projects list
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+      - name: Terraform Init
+        run: terraform init -backend-config="bucket=${{ secrets.TERRAFORM_STATE_BUCKET }}"
+      - name: Terraform Format
+        run: terraform fmt -check -recursive
+      - name: Terraform Validate
+        run: terraform validate -no-color
+
+  plan:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Authenticating
+        uses: google-github-actions/auth@v2.1.2
+        with:
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.SEED_SA_EMAIL_ADDRESS }}
+      - name: Setting up GCP environment
+        uses: google-github-actions/setup-gcloud@v2.1.0
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+      - name: Init
+        run: terraform init -backend-config="bucket=${{ secrets.TERRAFORM_STATE_BUCKET }}"
+      - name: Terraform Plan
+        #run: terraform plan -no-color -var git_sha="${{ github.sha }}" -out=tfplan
+        run: terraform plan -no-color -out=tfplan
+      - name: Show Terraform Plan as Summary
+        run: |
+          {
+            echo "### Terraform Plan Output";
+            echo "\`\`\`";
+            terraform show -no-color tfplan;
+            echo "\`\`\`";
+          }  > "${GITHUB_STEP_SUMMARY}"

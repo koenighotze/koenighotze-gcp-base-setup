@@ -11,16 +11,16 @@ locals {
 # }
 
 resource "google_project_service" "additional_apis" {
-  count = length(local.api_config)
+  for_each = { for api in local.api_config : "${api.project}-${api.api}" => api }
 
-  project = local.api_config[count.index].project
-  service = local.api_config[count.index].api
+  project = each.value.project
+  service = each.value.api
 }
 
 resource "google_project_iam_member" "project_iam_member" {
-  count = length(local.role_config)
+  for_each = { for role in local.role_config : "${role.project}-${role.role}" => role }
 
-  project = local.role_config[count.index].project
-  role    = local.role_config[count.index].role
+  project = each.value.project
+  role    = each.value.role
   member  = "serviceAccount:${local.seed_service_account_email}"
 }

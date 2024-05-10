@@ -17,24 +17,25 @@ locals {
 
       extra_roles = [
         "roles/iam.serviceAccountAdmin",
-        "roles/resourcemanager.projectIamAdmin",
         "roles/storage.admin",
         "roles/monitoring.admin",
-        "roles/serviceusage.serviceUsageAdmin"
       ]
     }
 
-    "terraform-example" = {
+    "terraform-examples" = {
       extra_apis = [
+        "billingbudgets.googleapis.com",
+        "cloudasset.googleapis.com",
+        "compute.googleapis.com",
+        "iap.googleapis.com",
+        "networkmanagement.googleapis.com",
         "run.googleapis.com",
       ]
 
       extra_roles = [
         "roles/iam.serviceAccountAdmin",
-        "roles/resourcemanager.projectIamAdmin",
         "roles/storage.admin",
         "roles/monitoring.admin",
-        "roles/serviceusage.serviceUsageAdmin"
       ]
     }
   }
