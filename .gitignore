@@ -38,3 +38,4 @@ key-file.json
 *.state
 variable-defaults.tfvars
 scripts/local.sh
+defaults.auto.tfvars

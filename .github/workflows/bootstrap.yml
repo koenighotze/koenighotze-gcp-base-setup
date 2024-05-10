@@ -1,4 +1,4 @@
-name: Apply
+name: Bootstrap setup
 
 on:
   workflow_dispatch:

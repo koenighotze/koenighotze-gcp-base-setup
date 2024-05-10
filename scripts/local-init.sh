@@ -17,7 +17,7 @@ gcloud config set project koenighotze-seed-398addce
 # gcloud auth application-default login
 
 if bucket_exists "$SEED_PROJECT"; then
-    terraform init -backend-config="bucket=$SEED_PROJECT"
+    terraform init -backend-config="bucket=$SEED_PROJECT" $*
 else
     echo "Missing bucket '$SEED_PROJECT'; cannot initialize backend"
     exit 1 

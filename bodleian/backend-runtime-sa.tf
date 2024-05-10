@@ -17,14 +17,14 @@ resource "google_project_iam_member" "bodleian_backend_service_iam_binding" {
   member  = "serviceAccount:${google_service_account.backend_service_sa.email}"
 }
 
-resource "google_service_account_iam_member" "backend_service_sa_user_iam_binding_serviceaccountuser" {
+resource "google_service_account_iam_member" "deployer_serviceaccountuser" {
   service_account_id = google_service_account.backend_service_sa.name
   role               = "roles/iam.serviceAccountUser"
 
   member = "serviceAccount:${google_service_account.backend_deployer_sa.email}"
 }
 
-resource "google_service_account_iam_member" "backend_service_sa_user_iam_binding_serviceaccountuser" {
+resource "google_service_account_iam_member" "infrastructure_serviceaccountuser" {
   service_account_id = google_service_account.backend_service_sa.name
   role               = "roles/iam.serviceAccountUser"
 
