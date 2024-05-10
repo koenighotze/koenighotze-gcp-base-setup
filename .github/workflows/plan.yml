@@ -104,4 +104,12 @@ jobs:
       - name: Init
         run: terraform init -backend-config="bucket=${{ secrets.TERRAFORM_STATE_BUCKET }}"
       - name: Plan
-        run: terraform plan -no-color
+        run: terraform plan -no-color -out=tfplan
+      - name: Show Terraform Plan as Summary
+        run: |
+          {
+            echo "### Terraform Plan Output";
+            echo "\`\`\`";
+            terraform show -no-color tfplan;
+            echo "\`\`\`";
+          }  > "${GITHUB_STEP_SUMMARY}"
