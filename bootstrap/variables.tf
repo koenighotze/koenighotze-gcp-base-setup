@@ -29,6 +29,13 @@ variable "postfix" {
   default     = "398addce"
 }
 
+variable "extra_labels" {
+  type        = map(string)
+  description = "Extra labels to apply to resources"
+  default     = {}
+}
+
+
 # variable "seed_sa_email" {
 #   type        = string
 #   sensitive   = true

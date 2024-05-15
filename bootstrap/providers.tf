@@ -1,12 +1,8 @@
-# provider "google-beta" {
-#   region = var.region
-# }
-
 provider "github" {
 }
 
 provider "google" {
-  default_labels = local.default_labels
+  default_labels = merge(local.default_labels, var.extra_labels)
 }
 
 provider "random" {

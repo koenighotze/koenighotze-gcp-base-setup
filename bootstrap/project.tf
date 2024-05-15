@@ -3,13 +3,6 @@ locals {
   api_config  = flatten([for project, config in local.projects : [for api in concat(local.common_apis, config.extra_apis) : { project = "${project}-${var.postfix}", api = api }]])
 }
 
-# resource "google_billing_project_info" "billing_info" {
-#   for_each = local.projects
-
-#   project         = each.key
-#   billing_account = var.billing_account_id
-# }
-
 resource "google_project_service" "additional_apis" {
   for_each = { for api in local.api_config : "${api.project}-${api.api}" => api }
 
