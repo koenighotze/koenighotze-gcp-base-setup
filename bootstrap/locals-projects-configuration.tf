@@ -19,7 +19,6 @@ locals {
       ]
 
       extra_roles = [
-        "roles/iam.serviceAccountAdmin",
         "roles/storage.admin",
         "roles/monitoring.admin",
       ]
@@ -36,7 +35,6 @@ locals {
       ]
 
       extra_roles = [
-        "roles/iam.serviceAccountAdmin",
         "roles/storage.admin",
         "roles/monitoring.admin",
       ]

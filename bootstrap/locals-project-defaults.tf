@@ -10,7 +10,9 @@ locals {
     "cloudresourcemanager.googleapis.com",
   ]
 
+  # which common roles should the seed SA have in the child project
   common_roles = [
+    "roles/iam.serviceAccountAdmin",
     "roles/serviceusage.serviceUsageAdmin",
     "roles/resourcemanager.projectIamAdmin"
   ]
