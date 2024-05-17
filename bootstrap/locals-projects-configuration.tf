@@ -1,10 +1,13 @@
 locals {
-  projects = {
+  // Define a map of default projects with their associated APIs and roles
+  default_projects = {
     "platform" = {
+      // List of extra APIs to be enabled for the project
       extra_apis = [
         "artifactregistry.googleapis.com",
       ]
 
+      // List of extra roles to be assigned to the service account for the project
       extra_roles = [
         "roles/artifactregistry.admin",
       ]
@@ -39,4 +42,7 @@ locals {
       ]
     }
   }
+
+  // If no project configuration is provided, use the default projects. Otherwise, use the provided configuration.
+  projects = length(var.projects_config) == 0 ? local.default_projects : var.projects_config
 }
