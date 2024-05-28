@@ -26,6 +26,18 @@ permissions:
   id-token: write
 
 jobs:
+  security-scan:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Security scan
+        uses: aquasecurity/trivy-action@0.21.0
+        with:
+          scan-type: config
+          trivy-config: trivy.yaml
+          ignore-unfixed: false
+
   compliance-scan:
     runs-on: ubuntu-20.04
     steps:
