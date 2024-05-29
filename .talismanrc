@@ -15,4 +15,6 @@ fileignoreconfig:
   checksum: a352b3ff11535ee1dbde2fa1be20c27eeb47e949d75813dc8d6a1c2d0723a468
 - filename: .github/workflows/apply.yml
   checksum: 14e74da1c652a7c934da15eda3b90e15fc6fd43b4f7267525248b8569f037b9a
+- filename: terraform-examples/repository-secrets.tf
+  checksum: 3bcc2a795a680ae69eefdd3d35f8f0b418b2584eb5d1d77e88729c15fb273fbe
 version: ""
