@@ -10,9 +10,9 @@ variable "github_api_label_token" {
   description = "The API Token for the GitHub API used in pull requests"
 }
 
-variable "project_postfix" {
+variable "project_id" {
   type        = string
-  description = "The unique postfix for the projects"
+  description = "The id of the project"
 }
 
 variable "workload_identity_provider_name" {

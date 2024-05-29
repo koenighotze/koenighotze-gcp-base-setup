@@ -1,7 +1,7 @@
 module "bodleian" {
   source = "./bodleian"
 
-  project_postfix = var.project_postfix
+  project_id = local.bodleian_project_id
 
   github_admin_token              = var.github_admin_token
   github_api_label_token          = var.github_api_label_token

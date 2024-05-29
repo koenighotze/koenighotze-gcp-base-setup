@@ -1,3 +1,3 @@
 data "google_project" "project" {
-  project_id = "bodleian-${var.project_postfix}"
+  project_id = var.project_id
 }

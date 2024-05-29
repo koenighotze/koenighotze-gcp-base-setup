@@ -1,5 +1,5 @@
 resource "google_service_account" "backend_service_sa" {
-  project     = data.google_project.project.project_id
+  project     = var.project_id
   account_id  = "bodleian-backend"
   description = "Service account for running the backend part"
 }
@@ -12,7 +12,7 @@ resource "google_project_iam_member" "bodleian_backend_service_iam_binding" {
     "roles/run.developer",
     "roles/viewer"
   ])
-  project = data.google_project.project.project_id
+  project = var.project_id
   role    = each.value
   member  = "serviceAccount:${google_service_account.backend_service_sa.email}"
 }

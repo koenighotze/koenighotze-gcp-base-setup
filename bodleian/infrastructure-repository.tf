@@ -6,7 +6,7 @@ module "bodleian_project" {
   #checkov:skip=CKV_TF_2:No version for the module ref.
   source = "git::https://github.com/koenighotze/gcp-tf-modules.git//infrastructure-project"
 
-  project_id                      = data.google_project.project.project_id
+  project_id                      = var.project_id
   project_name                    = "bodleian"
   github_admin_token              = var.github_admin_token
   github_api_label_token          = var.github_api_label_token
