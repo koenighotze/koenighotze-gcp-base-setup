@@ -1,5 +1,5 @@
 module "platform" {
   source = "./platform"
 
-  project_postfix = var.project_postfix
+  project_id = "platform-${var.project_postfix}"
 }
