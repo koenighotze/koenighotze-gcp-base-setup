@@ -1,6 +1,9 @@
 fileignoreconfig:
-- filename: bootstrap/.terraform.lock.hcl
-  checksum: 71d701c01b45487b115133bee4aca3d7b721c0683a04013f4c59db668ccdb657
 - filename: .terraform.lock.hcl
-  checksum: 2fc9db3f97c5d9d30b4caa4b1adbc02e356af7fec6e3da8d625431be3903db91
-version: ""
+  allowed_patterns:
+    - "zh:.*"
+    - "h1:.*"
+- filename: bootstrap/.terraform.lock.hcl
+  allowed_patterns:
+    - "zh:.*"
+    - "h1:.*"
