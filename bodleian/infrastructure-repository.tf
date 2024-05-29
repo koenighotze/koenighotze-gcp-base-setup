@@ -15,4 +15,3 @@ module "bodleian_project" {
   container_registry              = var.container_registry
   service_account_email           = google_service_account.bodleian_infrastructure_service_account.email
 }
-# 

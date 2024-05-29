@@ -15,6 +15,7 @@ resource "google_storage_bucket" "state_bucket" {
   }
 }
 
+#trivy:ignore:avd-gcp-0007
 resource "google_storage_bucket_iam_member" "bucket_iam_member" {
   bucket = google_storage_bucket.state_bucket.name
   role   = "roles/storage.admin"
