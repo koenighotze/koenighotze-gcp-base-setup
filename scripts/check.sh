@@ -15,5 +15,6 @@ tflint --init
 tflint -f compact --disable-rule=terraform_module_pinned_source --disable-rule=terraform_required_providers
 terraform validate -no-color
 terraform fmt -check -recursive
+trivy config .
 
 checkov --quiet -d .

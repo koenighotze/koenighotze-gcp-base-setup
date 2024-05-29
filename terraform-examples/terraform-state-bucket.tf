@@ -1,3 +1,4 @@
+#trivy:ignore:avd-gcp-0066
 resource "google_storage_bucket" "state_bucket" {
   #checkov:skip=CKV_GCP_62:Logging deactivated for now
   project                     = data.google_project.project.project_id

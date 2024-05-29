@@ -1,3 +1,5 @@
+#trivy:ignore:avd-gcp-0066
+#trivy:ignore:avd-git-0001
 module "bodleian_project" {
   # tflint-ignore: terraform_module_pinned_source
   #checkov:skip=CKV_TF_2:No version for the module ref.
