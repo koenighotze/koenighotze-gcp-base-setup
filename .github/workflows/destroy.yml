@@ -29,7 +29,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - run: docker run -v ${PWD}:/src aquasec/tfsec:v1.8 /src
+      - name: Security scan
+        uses: aquasecurity/trivy-action@0.21.0
+        with:
+          scan-type: config
+          trivy-config: trivy.yaml
+          ignore-unfixed: false
 
   destroy:
     runs-on: ubuntu-20.04

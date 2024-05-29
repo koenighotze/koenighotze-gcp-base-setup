@@ -43,11 +43,11 @@ jobs:
 
   compliance-scan:
     runs-on: ubuntu-20.04
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Run Checkov action
-        id: checkov
         uses: bridgecrewio/checkov-action@v12.2750.0
 
   lint:
@@ -66,6 +66,7 @@ jobs:
 
   qa:
     runs-on: ubuntu-20.04
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
