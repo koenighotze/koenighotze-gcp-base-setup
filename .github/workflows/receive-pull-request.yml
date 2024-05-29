@@ -10,7 +10,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Run Checkov action
-        uses: bridgecrewio/checkov-action@v12.2750.0
+        id: checkov
+        uses: bridgecrewio/checkov-action@v12.2760.0
 
   security-scan:
     runs-on: ubuntu-20.04
