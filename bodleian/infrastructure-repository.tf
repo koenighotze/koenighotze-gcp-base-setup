@@ -3,7 +3,7 @@
 module "bodleian_project" {
   # tflint-ignore: terraform_module_pinned_source
   #checkov:skip=CKV_TF_1:No version for the module ref.
-  source = "git::https://github.com/koenighotze/gcp-tf-modules.git?ref=main//infrastructure-project"
+  source = "git::https://github.com/koenighotze/gcp-tf-modules.git//infrastructure-project"
 
   project_id                      = data.google_project.project.project_id
   project_name                    = "bodleian"
