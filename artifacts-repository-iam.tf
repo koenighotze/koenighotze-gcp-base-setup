@@ -17,7 +17,7 @@ resource "google_artifact_registry_repository_iam_member" "artifact_registry_rea
   for_each = toset(local.artifact_reader_sas)
 
   provider   = google-beta
-  project    = module.platform.project_id
+  project    = local.platform_project_id
   location   = module.platform.location
   repository = module.platform.repository
   role       = "roles/artifactregistry.reader"
@@ -28,7 +28,7 @@ resource "google_artifact_registry_repository_iam_member" "artifact_registry_wri
   for_each = toset(local.artifact_writer_sas)
 
   provider   = google-beta
-  project    = module.platform.project_id
+  project    = local.platform_project_id
   location   = module.platform.location
   repository = module.platform.repository
   role       = "roles/artifactregistry.writer"
