@@ -6,7 +6,6 @@ resource "google_service_account" "sa" {
   description  = "Admin service account for ${data.google_project.platform_project.project_id}"
 }
 
-# This SA needs to be able to do some privileged work
 resource "google_project_iam_member" "platform_iam_member_project" {
   for_each = toset([
     "roles/artifactregistry.admin",
@@ -16,7 +15,8 @@ resource "google_project_iam_member" "platform_iam_member_project" {
     "roles/viewer"
   ])
   project = data.google_project.platform_project.project_id
-  role    = each.value
+  #checkov:skip=CKV_GCP_117:This SA needs to be able to do some privileged work
+  role = each.value
 
   member = "serviceAccount:${google_service_account.sa.email}"
 }

@@ -8,7 +8,8 @@ resource "github_actions_secret" "secrets" {
     "WORKLOAD_IDENTITY_PROVIDER" = var.workload_identity_provider_name
   }
 
-  repository      = data.github_repository.repository.id
-  secret_name     = each.key
+  repository  = data.github_repository.repository.id
+  secret_name = each.key
+  #checkov:skip=CKV_GIT_4:Secrets are encrypted at rest in GitHub
   plaintext_value = each.value
 }

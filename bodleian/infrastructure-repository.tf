@@ -2,8 +2,8 @@
 #trivy:ignore:avd-git-0001
 module "bodleian_project" {
   # tflint-ignore: terraform_module_pinned_source
-  #checkov:skip=CKV_TF_2:No version for the module ref.
-  source = "github.com/koenighotze/gcp-tf-modules/infrastructure-project"
+  #checkov:skip=CKV_TF_1:No version for the module ref.
+  source = "git::https://github.com/koenighotze/gcp-tf-modules.git?ref=main//infrastructure-project"
 
   project_id                      = data.google_project.project.project_id
   project_name                    = "bodleian"
