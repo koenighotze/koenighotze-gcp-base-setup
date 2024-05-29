@@ -39,3 +39,6 @@ key-file.json
 variable-defaults.tfvars
 scripts/local.sh
 defaults.auto.tfvars
+.external_modules
+
+!.terraform.lock.hcl
