@@ -12,6 +12,7 @@ on:
       - bootstrap/**
 
 env:
+  TF_LOG: ${{ secrets.TF_LOG}}
   TF_VAR_billing_account_id: ${{ secrets.BILLING_ACCOUNT_ID }}
   TF_VAR_seed_sa_email: ${{ secrets.SEED_SA_EMAIL_ADDRESS }}
   TF_VAR_github_admin_token: ${{ secrets.GITHUB_ADMIN_TOKEN }}
