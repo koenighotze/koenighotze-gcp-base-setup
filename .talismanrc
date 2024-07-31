@@ -11,3 +11,4 @@ fileignoreconfig:
     - "h1:.*"
 - filename: terraform-examples/repository-secrets.tf
   checksum: 31853bd5393ebf049eda6fb95c476e96b2a7b2ae0290f30952b80679305b7de1
+version: ""
