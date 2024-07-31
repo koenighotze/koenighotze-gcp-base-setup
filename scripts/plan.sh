@@ -19,5 +19,6 @@ terraform plan \
     -var "workload_identity_provider_name=$PROVIDER_ID" \
     -var "workload_identity_pool_id=$WORKLOAD_IDENTITY_POOL" \
     -var "codacy_api_token=$CODACY_API_TOKEN" \
-    -var "docker_registry_username=$DOCKER_REGISTRY_USERNAME" \
-    -var "docker_registry_token=$DOCKER_REGISTRY_TOKEN" "$@"
+    "$@"
+    #-var "docker_registry_username=$DOCKER_REGISTRY_USERNAME" \
+    #-var "docker_registry_token=$DOCKER_REGISTRY_TOKEN" "$@"

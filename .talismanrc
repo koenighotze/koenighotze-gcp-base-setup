@@ -1,14 +1,5 @@
 fileignoreconfig:
 - filename: README.md
   checksum: cb47da812c5130894894a27836f03fc2514a81a43d2e3d71868eaf7b4cd7c05f
-- filename: .terraform.lock.hcl
-  allowed_patterns:
-    - "zh:.*"
-    - "h1:.*"
-- filename: bootstrap/.terraform.lock.hcl
-  allowed_patterns:
-    - "zh:.*"
-    - "h1:.*"
-- filename: terraform-examples/repository-secrets.tf
-  checksum: 31853bd5393ebf049eda6fb95c476e96b2a7b2ae0290f30952b80679305b7de1
 version: ""
+
