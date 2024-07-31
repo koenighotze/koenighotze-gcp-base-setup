@@ -1,4 +1,6 @@
 fileignoreconfig:
+- filename: README.md
+  checksum: cb47da812c5130894894a27836f03fc2514a81a43d2e3d71868eaf7b4cd7c05f
 - filename: .terraform.lock.hcl
   allowed_patterns:
     - "zh:.*"
