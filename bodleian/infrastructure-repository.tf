@@ -9,7 +9,7 @@ module "bodleian_project" {
   project_id                      = var.project_id
   project_name                    = "bodleian"
   github_admin_token              = var.github_admin_token
-  github_api_label_token          = var.github_api_label_token
+  github_api_label_token          = "deprecated"
   workload_identity_provider_name = var.workload_identity_provider_name
   workload_identity_pool_id       = var.workload_identity_pool_id
   codacy_api_token                = var.codacy_api_token

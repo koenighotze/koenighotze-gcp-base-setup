@@ -14,12 +14,12 @@ on:
 env:
   TF_VAR_billing_account_id: ${{ secrets.BILLING_ACCOUNT_ID }}
   TF_VAR_seed_sa_email: ${{ secrets.SEED_SA_EMAIL_ADDRESS }}
-  TF_VAR_github_admin_token: ${{ secrets.ADMIN_GITHUB_TOKEN }}
+  TF_VAR_github_admin_token: ${{ secrets.GITHUB_ADMIN_TOKEN }}
   TF_VAR_project_postfix: ${{ secrets.GCP_PROJECT_POSTFIX }}
   TF_IN_AUTOMATION: true
   TF_INPUT: false
-  GITHUB_TOKEN: ${{ secrets.ADMIN_GITHUB_TOKEN }}
-  GH_TOKEN: ${{ secrets.ADMIN_GITHUB_TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_ADMIN_TOKEN }}
+  GH_TOKEN: ${{ secrets.GITHUB_ADMIN_TOKEN }}
   CLOUDSDK_CORE_PROJECT: ${{ secrets.GCP_PROJECT_ID }}
 
 permissions:
@@ -111,7 +111,6 @@ jobs:
       - name: Init
         run: terraform init -backend-config="bucket=${{ secrets.TERRAFORM_STATE_BUCKET }}"
       - name: Terraform Plan
-        #run: terraform plan -no-color -var git_sha="${{ github.sha }}" -out=tfplan
         run: terraform plan -no-color -out=tfplan
       - name: Show Terraform Plan as Summary
         run: |
