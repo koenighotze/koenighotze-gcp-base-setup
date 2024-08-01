@@ -2,8 +2,7 @@
 # Manual edits may be lost in future updates.
 
 provider "registry.terraform.io/hashicorp/github" {
-  version     = "6.2.3"
-  constraints = ">= 4.0.0"
+  version = "6.2.3"
   hashes = [
     "h1:qBH3fN/NItflQkBoIVdQa7n8WvBOuu7Ao20oeoAubKM=",
     "zh:05874671652a260b12d784cc46b0eea156f493a5f12e00368d1f6cb319156257",
@@ -86,7 +85,7 @@ provider "registry.terraform.io/hashicorp/random" {
 
 provider "registry.terraform.io/integrations/github" {
   version     = "6.2.3"
-  constraints = ">= 4.0.0"
+  constraints = ">= 4.0.0, ~> 6.0"
   hashes = [
     "h1:qBH3fN/NItflQkBoIVdQa7n8WvBOuu7Ao20oeoAubKM=",
     "zh:05874671652a260b12d784cc46b0eea156f493a5f12e00368d1f6cb319156257",
