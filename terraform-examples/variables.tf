@@ -3,6 +3,12 @@ variable "project_id" {
   description = "The id of the project"
 }
 
+variable "seed_project_id" {
+  type        = string
+  description = "The id of the seed project"
+  default     = "642340482178"
+}
+
 variable "region" {
   default = "europe-west3"
 }
