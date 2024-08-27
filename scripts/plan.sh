@@ -14,7 +14,7 @@ source "$(dirname "$0")/common.sh"
 terraform plan \
     -var "billing_account_id=$BILLING_ACCOUNT" \
     -var "seed_sa_email=$SA_EMAIL" \
-    -var "github_admin_token=$GITHUB_ADMIN_TOKEN" \
+    -var "github_admin_token=$ADMIN_GITHUB_TOKEN" \
     -var "project_postfix=$POSTFIX" \
     -var "workload_identity_provider_name=$PROVIDER_ID" \
     -var "workload_identity_pool_id=$WORKLOAD_IDENTITY_POOL" \

@@ -12,6 +12,4 @@ if [[ "${TRACE-0}" == "1" ]]; then set -o xtrace; fi
 MY_DIR="$(dirname "$0")"
 source "$MY_DIR/local.sh"
 
-# TODO Deprecate
-gh secret set ADMIN_GITHUB_TOKEN -b "$GITHUB_ADMIN_TOKEN"
-gh secret set GITHUB_ADMIN_TOKEN -b "$GITHUB_ADMIN_TOKEN"
+gh secret set ADMIN_GITHUB_TOKEN -b "$ADMIN_GITHUB_TOKEN" 
