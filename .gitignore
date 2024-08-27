@@ -37,7 +37,7 @@ key-file.json
 .vscode/
 *.state
 variable-defaults.tfvars
-scripts/local.sh
+scripts/1password-ids.sh
 defaults.auto.tfvars
 .external_modules
 
