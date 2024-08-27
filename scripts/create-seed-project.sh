@@ -20,6 +20,7 @@ function main() {
 
     create_tf_state_bucket "$SEED_PROJECT"
 
+    # shellcheck disable=SC2153
     setup_github_secrets "$SEED_REPOSITORY" "$SEED_PROJECT" "$BILLING_ACCOUNT" "$POSTFIX" "$SEED_PROJECT"
 
     echo "Generated project $SEED_PROJECT with postfix: $POSTFIX"

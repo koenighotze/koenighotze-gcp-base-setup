@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2034
 # shellcheck disable=SC1091
 # when a command fails, bash exits instead of continuing with the rest of the script
 set -o errexit
