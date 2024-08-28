@@ -4,7 +4,7 @@ resource "github_actions_secret" "secrets" {
     "CICD_SA_ID"                 = google_service_account.sa.id
     "GCP_PROJECT_ID"             = var.project_id
     "TERRAFORM_STATE_BUCKET"     = google_storage_bucket.state_bucket.name
-    "WORKLOAD_IDENTITY_POOL_ID"  = var.workload_identity_pool_id
+    "WORKLOAD_IDENTITY_POOL_ID"  = var.workload_identity_pool_name
     "WORKLOAD_IDENTITY_PROVIDER" = var.workload_identity_provider_name
   }
 
