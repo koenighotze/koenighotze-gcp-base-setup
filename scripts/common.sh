@@ -20,5 +20,5 @@ SEED_PROJECT="koenighotze-seed-$POSTFIX"
 SEED_REPOSITORY=koenighotze/koenighotze-gcp-base-setup
 SA_ID=koenighotze-seed-sa
 SA_EMAIL="${SA_ID}@${SEED_PROJECT}.iam.gserviceaccount.com"
-WORKLOAD_IDENTITY_POOL=github-cicd-pool
+WORKLOAD_IDENTITY_POOL_NAME=projects/642340482178/locations/global/workloadIdentityPools/github-cicd-pool
 PROVIDER_ID=github-provider

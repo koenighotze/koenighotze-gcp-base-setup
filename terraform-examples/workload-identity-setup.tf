@@ -13,22 +13,3 @@ resource "google_service_account_iam_member" "workload_identity_sa_member" {
 
   member = local.member
 }
-
-# # Allow repository to use deployer service account
-# resource "google_service_account_iam_member" "gce-default-workload_identity_sa_member" {
-#   service_account_id = google_service_account.sa.id
-#   role               = "roles/iam.workloadIdentityUser"
-#   member             = local.member
-# }
-
-# resource "google_service_account_iam_member" "workload_identity_sa_member-a" {
-#   service_account_id = google_service_account.sa.id
-#   role               = "roles/iam.workloadIdentityUser"
-#   member             = local.member
-# }
-
-# resource "google_service_account_iam_member" "workload_identity_sa_member-b" {
-#   service_account_id = google_service_account.sa.id
-#   role               = "roles/iam.serviceAccountTokenCreator"
-#   member             = local.member
-# }

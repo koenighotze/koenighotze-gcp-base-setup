@@ -17,6 +17,6 @@ terraform apply \
     -var "github_admin_token=$ADMIN_GITHUB_TOKEN" \
     -var "project_postfix=$POSTFIX" \
     -var "workload_identity_provider_name=$PROVIDER_ID" \
-    -var "workload_identity_pool_id=$WORKLOAD_IDENTITY_POOL" \
+    -var "workload_identity_pool_name=$WORKLOAD_IDENTITY_POOL_NAME" \
     -var "codacy_api_token=$CODACY_API_TOKEN" \
     "$@"
