@@ -49,9 +49,6 @@ jobs:
         uses: bridgecrewio/checkov-action@v12.2840.0
 
   apply:
-    concurrency:
-      group: terraform
-
     runs-on: ubuntu-20.04
 
     needs:
