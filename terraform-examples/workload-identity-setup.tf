@@ -1,7 +1,8 @@
 locals {
 
   #        "principalSet://iam.googleapis.com/projects/642340482178/locations/global/workloadIdentityPools/github-cicd-pool/attribute.repository/${data.github_repository.repository.full_name}" #local.member
-  member = "principalSet://iam.googleapis.com/projects/${var.seed_project_id}/locations/global/workloadIdentityPools/${var.workload_identity_pool_id}/attribute.repository/${data.github_repository.repository.full_name}"
+  # member = "principalSet://iam.googleapis.com/projects/${var.seed_project_id}/locations/global/workloadIdentityPools/${var.workload_identity_pool_id}/attribute.repository/${data.github_repository.repository.full_name}"
+  member = "principalSet://iam.googleapis.com/${var.workload_identity_pool_id}/attribute.repository/${data.github_repository.repository.full_name}"
 }
 
 # resource "google_service_account_iam_binding" "workload_identity_sa_binding" {
