@@ -29,8 +29,8 @@ resource "google_service_account_iam_member" "workload_identity_sa_member-a" {
   member             = "principalSet://iam.googleapis.com/projects/642340482178/locations/global/workloadIdentityPools/github-cicd-pool/attribute.repository/${data.github_repository.repository.full_name}" #local.member
 }
 
-# resource "google_service_account_iam_member" "workload_identity_sa_member-b" {
-#   service_account_id = google_service_account.sa.id
-#   role               = "roles/iam.serviceAccountTokenCreator"
-#   member             = "principalSet://iam.googleapis.com/projects/642340482178/locations/global/workloadIdentityPools/github-cicd-pool/attribute.repository/${data.github_repository.repository.full_name}" #local.member
-# }
+resource "google_service_account_iam_member" "workload_identity_sa_member-b" {
+  service_account_id = google_service_account.sa.id
+  role               = "roles/iam.serviceAccountTokenCreator"
+  member             = "principalSet://iam.googleapis.com/projects/642340482178/locations/global/workloadIdentityPools/github-cicd-pool/attribute.repository/${data.github_repository.repository.full_name}" #local.member
+}
