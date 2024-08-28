@@ -48,7 +48,7 @@ function setup_workload_pool() {
   gcloud iam workload-identity-pools create "$workload_identity_pool" \
           --project="$project_id" \
           --location="global" \
-          --display-name="WIP for GitHub CI/CD"
+          --display-name="Workload Pool for GitHub CI/CD"
 }
 
 function fetch_workload_identity_pool_id() {
