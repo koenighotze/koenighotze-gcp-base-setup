@@ -1,5 +1,8 @@
 name: Bootstrap setup
 
+concurrency:
+  group: terraform-bootstrap
+
 on:
   workflow_dispatch:
     inputs:

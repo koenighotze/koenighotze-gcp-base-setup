@@ -89,6 +89,9 @@ jobs:
         run: terraform validate -no-color
 
   plan:
+    concurrency:
+      group: terraform
+
     runs-on: ubuntu-20.04
 
     needs:
