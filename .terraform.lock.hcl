@@ -44,22 +44,22 @@ provider "registry.terraform.io/hashicorp/google" {
 }
 
 provider "registry.terraform.io/hashicorp/google-beta" {
-  version     = "7.7.0"
+  version     = "7.12.0"
   constraints = ">= 4.0.0"
   hashes = [
-    "h1:WGz3ddOpHsRrti0cChTB/nA97D2JB0lBm6qq2OGyemg=",
-    "zh:0a8171641254cc40e3e36c3051dbd647345cddeceaa093cc5a5b546337d56c9c",
-    "zh:0dd3a9aade731fe67750700d98a0e8c01f5af16fd3d226618515ed209b901fd4",
-    "zh:2368351c948f8c0ebde61f8b1e966b2ef35482b85e7dffc3bbb9728dd0b06cd8",
-    "zh:2bc33fec30fa72a2d6dcfe79f00fa7dd4613df675e54bf4e0fe1152ab48143a9",
-    "zh:372531f20e72e62472d98d4c90cf84bf21aa4af035cb529d7705d07f1c7eb3b3",
-    "zh:3815b9b785447f6b89f2d98d12d9dd3ee5f0492faf002c99ff5bb0f0bbc10b6f",
-    "zh:38b557dea7a767dcbc2efa2e078950c3b0b33000d1d12f03ea8e31e0219eed86",
-    "zh:b3a23230bfebdc92dcdfc01f21928467a2e301545dfbb2f91b46bfb63dc9c2b2",
-    "zh:c8a9d6daaaa9b01dcf25f9c0615104bd9e7aeaa1d343d812ab3df8e824ca56fa",
-    "zh:d07001dfec4cb07e82ac6d25bc5aa33ef9a936b802c1e03ce53408fc1fe86c11",
-    "zh:df6d1aa1de7de33688dd6f0658cb8a5601386cd6aea5d7b51cd02e6c5d15503b",
+    "h1:vp26U2dNza+E+o45vmEvRszQJZfws9qUC2Z8I2ePO0Q=",
+    "zh:297f689ccd89d3b3ca04ae175676bea988abcd3aececa6205303bc3f3bfdc91d",
+    "zh:631b7d6b12ee382ab13f56cdf500122e7cf80af8a80c6a5ce32a6f4f3693567c",
+    "zh:87aa6ac3f2aac978af25f07ea9e594423d9b18dc1a9831a9f92650f35bf0aea9",
+    "zh:a6437ac426065c51ccff6d71f6bea4af7d027144f79c24a93b549d49fcad3092",
+    "zh:ba56d7d5712404d5bb813eeaf47c4efb08520bc76c908fae02a73bdd0fb4f420",
+    "zh:bb271c97b80393c1eb9ae1d132e7839451c3f0ab804a2880efa7af218586107e",
+    "zh:c68379d252c2577df956187133c240f046bf9b8205a57715ed601cc922cd693f",
+    "zh:c721de9327a10f3932f67b041d7edafdf8e25804278bc344f74f6654c4ac0a05",
+    "zh:e4e8106261a0d3564a6315fdfae05b802948a06c30acbff7f425af11e5ca921f",
+    "zh:ed92ef287c8570ce48f0bcafbd50f2cc865012a39e92389a51e7b009eb30a316",
     "zh:f569b65999264a9416862bca5cd2a6177d94ccb0424f3a4ef424428912b9cb3c",
+    "zh:f6ed8f74eeb03c3651f205cd892cd20bf015fe93d814b1995a499afc26a84a06",
   ]
 }
 
