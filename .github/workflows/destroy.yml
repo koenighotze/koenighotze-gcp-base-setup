@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Security scan
         uses: aquasecurity/trivy-action@0.34.0
         with:
@@ -43,7 +43,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Authenticating
         uses: google-github-actions/auth@v3.0.0
         with:
